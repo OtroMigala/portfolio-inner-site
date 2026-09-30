@@ -1,6 +1,11 @@
 import React from 'react';
 import ResumeDownload from './ResumeDownload';
 import aessLogo from '../../assets/pictures/logos/aess.svg';
+import ezlifeLogo from '../../assets/pictures/logos/EzlifeLogo.png';
+import cimdolLogo from '../../assets/pictures/logos/logocimdol-CBjlnQpX.webp';
+import ticanor1 from '../../assets/pictures/projects/Ticanor1.jpeg';
+import ticanor2 from '../../assets/pictures/projects/Ticanor2.jpeg';
+import juntaAESS from '../../assets/pictures/projects/juntaAESS.jpeg';
 
 export interface ExperienceProps {}
 
@@ -54,6 +59,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                 dates="2026 - Presente"
                 url="https://www.ezlife.com.co/"
                 urlText="www.ezlife.com.co"
+                logo={ezlifeLogo}
             />
             <div className="text-block">
                 <p>
@@ -120,6 +126,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                 company="CIMDOL SAS"
                 role="Ingeniero de Sistemas"
                 dates="2025 - Presente"
+                logo={cimdolLogo}
             />
             <div className="text-block">
                 <ul>
@@ -154,6 +161,8 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                         </p>
                     </li>
                 </ul>
+                <img src={ticanor1} style={styles.image} alt="" />
+                <img src={ticanor2} style={styles.image} alt="" />
             </div>
             <ExperienceHeader
                 company="IEEE AESS Unicauca"
@@ -190,6 +199,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                         </p>
                     </li>
                 </ul>
+                <img src={juntaAESS} style={styles.image} alt="" />
             </div>
             <ExperienceHeader
                 company="Freelance"
@@ -235,6 +245,11 @@ const styles: StyleSheetCSS = {
     headerRow: {
         justifyContent: 'space-between',
         alignItems: 'flex-end',
+    },
+    image: {
+        width: '100%',
+        height: 'auto',
+        marginTop: 16,
     },
     row: {
         display: 'flex',

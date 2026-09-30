@@ -1,6 +1,13 @@
 import React from 'react';
 import ResumeDownload from '../ResumeDownload';
 import aessLogo from '../../../assets/pictures/logos/aess.svg';
+import tulcanSatLogo from '../../../assets/pictures/logos/Logo_TulcanSat.png';
+import spaceAppsLogo from '../../../assets/pictures/logos/Square.png';
+import tulcanSat from '../../../assets/pictures/projects/TULCANSAT.jpg';
+import airSat from '../../../assets/pictures/projects/Air Sat.jpeg';
+import airSatSatellite from '../../../assets/pictures/projects/sateliteAirsat.jpeg';
+import ticanor1 from '../../../assets/pictures/projects/Ticanor1.jpeg';
+import ticanor2 from '../../../assets/pictures/projects/Ticanor2.jpeg';
 
 export interface AerospaceProjectsProps {}
 
@@ -18,6 +25,7 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
             <br />
             <img src={aessLogo} style={styles.logo} alt="IEEE AESS" />
             <div className="text-block">
+                <img src={tulcanSatLogo} style={styles.logo} alt="TULCAN-SAT" />
                 <h2>TULCAN-SAT</h2>
                 <h4>Curso-Concurso Mundial CanSat 2025 (UNAM)</h4>
                 <br />
@@ -28,6 +36,7 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
                     de Kalman Extendido (EKF). Como líder de equipo, llevamos el
                     proyecto al 8.º lugar del concurso mundial.
                 </p>
+                <img src={tulcanSat} style={styles.image} alt="" />
             </div>
             <div className="text-block">
                 <h2>AIR-SAT</h2>
@@ -39,6 +48,8 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
                     gran altura. Obtuvo el 1.er lugar en la categoría
                     Picosatélite – Carga Útil.
                 </p>
+                <img src={airSat} style={styles.image} alt="" />
+                <img src={airSatSatellite} style={styles.image} alt="" />
             </div>
             <div className="text-block">
                 <h2>Navegación de dron agrícola</h2>
@@ -50,6 +61,8 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
                     navegación de un dron de monitoreo agrícola, en un proyecto
                     financiado por la iniciativa DSTEI de IEEE.
                 </p>
+                <img src={ticanor1} style={styles.image} alt="" />
+                <img src={ticanor2} style={styles.image} alt="" />
             </div>
             <div className="text-block">
                 <h2>Voices of Water and Earth</h2>
@@ -63,6 +76,7 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
                 </p>
             </div>
             <div className="text-block">
+                <img src={spaceAppsLogo} style={styles.logo} alt="NASA Space Apps" />
                 <h2>NASA Space Apps Challenge</h2>
                 <h4>Ediciones 2024 y 2025</h4>
                 <br />
@@ -82,6 +96,11 @@ const styles: StyleSheetCSS = {
         width: 'auto',
         alignSelf: 'flex-start',
         marginBottom: 16,
+    },
+    image: {
+        width: '100%',
+        height: 'auto',
+        marginTop: 16,
     },
 };
 

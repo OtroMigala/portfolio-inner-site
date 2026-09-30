@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 *.psd
+# backup local del .git original de Henry
+/_git-original-henry

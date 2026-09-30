@@ -52,7 +52,7 @@ const About: React.FC<AboutProps> = (props) => {
                     <img src={meBaby} style={styles.image} alt="" />
                     <p>
                         <sub>
-                            <b>Figura 1:</b> Yo, en mi primera versión beta :)
+                            Yo intentando borrar el kernel sin permiso
                         </sub>
                     </p>
                 </div>
@@ -95,7 +95,7 @@ const About: React.FC<AboutProps> = (props) => {
                     <img src={meTrondheim} style={styles.image} alt="" />
                     <p>
                         <sub>
-                            <b>Figura 2:</b> Trondheim, Noruega, 2026
+                            Yo, Trondheim
                         </sub>
                     </p>
                 </div>
@@ -140,7 +140,7 @@ const About: React.FC<AboutProps> = (props) => {
                         <img src={meNow} style={styles.image} alt="" />
                         <p>
                             <sub>
-                                <b>Figura 3:</b> Yo, Trondheim 2026
+                                Yo, Trondheim otra vez
                             </sub>
                         </p>
                     </div>
