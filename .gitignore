@@ -25,3 +25,6 @@ yarn-error.log*
 *.psd
 # backup local del .git original de Henry
 /_git-original-henry
+
+# Generated before each build from the CMS or content/snapshot
+src/content/generated/

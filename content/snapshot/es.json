@@ -1,0 +1,366 @@
+{
+    "locale": "es",
+    "profile": {
+        "fullName": "Juan Alejandro Cárdenas Urbano",
+        "firstName": "Alejo",
+        "lastName": "Cárdenas",
+        "role": "Ingeniero de Sistemas",
+        "tagline": "Si puedes imaginarlo, puede programarse",
+        "location": "Popayán, Colombia",
+        "summary": [
+            "Estudio Ingeniería de Sistemas en la Universidad del Cauca, en Popayán, Colombia, y trabajo como desarrollador full stack. Actualmente estoy en EzLife construyendo sistemas de información gubernamentales con microservicios en NestJS, Next.js y React.",
+            "Gracias por tomarte el tiempo de explorar mi portafolio. Espero que lo disfrutes tanto como yo disfruté armándolo. Si tienes preguntas, propuestas o simplemente quieres saludar, escríbeme desde [este formulario](#contact) o al correo [juan_cardenas@qualityac.co](mailto:juan_cardenas@qualityac.co)"
+        ],
+        "closing": [
+            "¡Gracias por leer sobre mí! Espero que disfrutes explorando el resto de JACUSys y todo lo que tiene para ofrecer. Y sí, los juegos del escritorio funcionan.",
+            "Si tienes preguntas o comentarios, me encantaría leerlos. Puedes escribirme desde la [página de contacto](#contact) o al correo [juan_cardenas@qualityac.co](mailto:juan_cardenas@qualityac.co)"
+        ],
+        "portrait": {
+            "url": "asset:pictures/alejo-retrato.jpg",
+            "alt": "Alejo sonriendo en una colina con vista a Trondheim y su catedral al fondo",
+            "caption": "Yo, Trondheim otra vez"
+        },
+        "resume": {
+            "url": "asset:resume/CV_Juan_Alejandro_Cardenas.pdf",
+            "alt": "Hoja de vida de Juan Alejandro Cárdenas Urbano (PDF)"
+        }
+    },
+    "about": [
+        {
+            "id": "about-me",
+            "heading": "Sobre mí",
+            "body": [
+                "Mi lema es simple: si puedes imaginarlo, puede programarse. Me muevo entre dos mundos que se cruzan más de lo que parece: el desarrollo de software full stack y los sistemas embebidos y aeroespaciales. En uno trabajo con Node.js, NestJS, PostgreSQL/PostGIS, Next.js y React; en el otro, con C sobre microcontroladores STM32, telemetría y filtros de Kalman.",
+                "Empecé Ingeniería de Sistemas en la Universidad del Cauca en 2021. Desde entonces he trabajado en la migración de sistemas monolíticos a microservicios, en seguridad y control de acceso (RBAC), en pruebas automatizadas con Jest y Playwright, y en el desarrollo de páginas web como freelance. Puedes ver el detalle en mi página de [experiencia](#experience).",
+                "Desde febrero de 2025 soy vicepresidente del capítulo estudiantil IEEE AESS Unicauca. Ahí he dirigido los equipos del capítulo en el concurso mundial CanSat de la UNAM y en ENMICE, y la organización del hackathon NASA Space Apps Challenge. Esos proyectos están en mi página de [proyectos aeroespaciales](#projects-aerospace)."
+            ],
+            "image": {
+                "url": "asset:pictures/alejo-bebe.jpg",
+                "alt": "Alejo de bebé, de pie en un corral, estirando la mano hacia la cámara",
+                "caption": "Yo intentando borrar el kernel sin permiso"
+            },
+            "imageAfter": 1
+        },
+        {
+            "id": "information-fusion",
+            "heading": "Fusión de información",
+            "body": [
+                "Mi interés investigativo es la fusión de información (information fusion) aplicada a navegación, drones/UAVs y estimación de estados. La International Society of Information Fusion (ISIF) me otorgó la beca FUSION dos veces: en 2025 para el bootcamp en Río de Janeiro, Brasil, y en 2026 para el bootcamp en la Norwegian University of Science and Technology (NTNU), en Trondheim, Noruega."
+            ],
+            "logo": {
+                "url": "asset:pictures/logos/isif.png",
+                "alt": "ISIF"
+            },
+            "image": {
+                "url": "asset:pictures/alejo-trondheim.jpg",
+                "alt": "Alejo sobre el puente Gamle Bybro de Trondheim, con las casas de madera de colores junto al río al fondo",
+                "caption": "Yo, Trondheim"
+            },
+            "imageAfter": 1
+        }
+    ],
+    "experience": [
+        {
+            "id": "ezlife",
+            "organization": "EzLife",
+            "role": "Analista de Desarrollo de Software",
+            "start": "2026",
+            "end": null,
+            "website": {
+                "label": "www.ezlife.com.co",
+                "url": "https://www.ezlife.com.co/",
+                "kind": "website"
+            },
+            "summary": "Desarrollo e implementación de sistemas de información gubernamentales, con flujos de trabajo por estados y roles. Trabajo con NestJS, gRPC, Next.js, React 19 y Docker.",
+            "highlights": [
+                "Migración de sistemas monolíticos a arquitecturas de microservicios con NestJS, comunicados mediante gRPC y HTTP detrás de un API Gateway.",
+                "Modernización de interfaces web legadas hacia Next.js y React 19, conservando la identidad visual y conectándolas a los nuevos servicios.",
+                "Implementación de flujos por estados y roles, gestión de plazos legales en días hábiles, numeración oficial y trazabilidad de actos administrativos.",
+                "Módulos de gestión masiva de datos oficiales: cargas masivas, inventarios por territorio y asignación automática y manual.",
+                "Detección y corrección de vulnerabilidades y fallas de integridad: suplantación de identidad, operaciones sin transacción, pérdida silenciosa de datos entre servicios y carga de archivos.",
+                "Aseguramiento de calidad con más de 300 pruebas unitarias en Jest y pruebas end-to-end con Playwright sobre entornos completos en Docker.",
+                "Integración de líneas de desarrollo paralelas y documentación técnica: reportes de pruebas, decisiones de negocio y guías de despliegue con migraciones de datos."
+            ],
+            "images": [],
+            "logo": {
+                "url": "asset:pictures/logos/EzlifeLogo.png",
+                "alt": ""
+            }
+        },
+        {
+            "id": "cimdol",
+            "organization": "CIMDOL SAS",
+            "role": "Ingeniero de Sistemas",
+            "start": "2025",
+            "end": null,
+            "highlights": [
+                "Desarrollo de software y de la página web de la organización.",
+                "Apoyo en mantenimiento de hardware de oficina."
+            ],
+            "images": [],
+            "logo": {
+                "url": "asset:pictures/logos/logocimdol-CBjlnQpX.webp",
+                "alt": ""
+            }
+        },
+        {
+            "id": "dstei-ticanor",
+            "organization": "DSTEI Ticanor",
+            "role": "Ingeniero de Sistemas",
+            "start": "2024",
+            "end": null,
+            "summary": "Proyecto financiado por la iniciativa DSTEI de IEEE para construir un dron de monitoreo agrícola.",
+            "highlights": [
+                "Diseño de algoritmos de fusión sensorial (LiDAR, infrarrojo, acelerómetro y GPS) para el subsistema de navegación del dron."
+            ],
+            "images": [
+                {
+                    "url": "asset:pictures/projects/Ticanor1.jpeg",
+                    "alt": "Equipo Ticanor en una sala de reuniones con varios drones sobre la mesa y la propuesta de la fase 3 proyectada al fondo"
+                },
+                {
+                    "url": "asset:pictures/projects/Ticanor2.jpeg",
+                    "alt": "Integrantes del equipo Ticanor sostienen drones junto a un portátil, frente a la presentación del proyecto"
+                }
+            ]
+        },
+        {
+            "id": "ieee-aess-unicauca",
+            "organization": "IEEE AESS Unicauca",
+            "role": "Vicepresidente",
+            "start": "2025-02",
+            "end": null,
+            "summary": "Capítulo estudiantil de la IEEE Aerospace and Electronic Systems Society en la Universidad del Cauca.",
+            "highlights": [
+                "Lideré la gestión y consecución de 6.200 USD para el proyecto \"Voices of Water and Earth\" (EPICS in IEEE): nodos de comunicación con sensado y fusión de datos para comunidades indígenas Misak del Cauca.",
+                "Dirigí los equipos de competencia del capítulo en el concurso mundial CanSat de la UNAM, ediciones 2024 y 2025.",
+                "Dirigí la organización del hackathon NASA Space Apps Challenge, ediciones 2024 y 2025."
+            ],
+            "images": [
+                {
+                    "url": "asset:pictures/projects/juntaAESS.jpeg",
+                    "alt": "Integrantes del capítulo IEEE AESS Unicauca con camisetas del capítulo, sosteniendo una bandera de AESS Unicauca"
+                }
+            ],
+            "logo": {
+                "url": "asset:pictures/logos/aess.svg",
+                "alt": ""
+            }
+        },
+        {
+            "id": "freelance",
+            "organization": "Freelance",
+            "role": "Desarrollador Web",
+            "dateLabel": "Independiente",
+            "highlights": [
+                "Página web de Sonido Cárdenas (empresa).",
+                "Página web del Semillero de Ingeniería Aeroespacial SIA (Unicauca)."
+            ],
+            "images": []
+        }
+    ],
+    "projectCategories": [
+        {
+            "id": "software",
+            "title": "Software",
+            "subtitle": "Proyectos",
+            "intro": "Estos son algunos de los proyectos de software en los que he trabajado. Mi experiencia profesional con sistemas de información gubernamentales está en la página de [experiencia](#experience).",
+            "projects": [
+                {
+                    "id": "jacusys",
+                    "title": "JACUSys",
+                    "description": [
+                        "JACUSys es mi portafolio y el sitio en el que estás ahora mismo. Es una adaptación del portafolio de código abierto de Henry Heffernan (licencia MIT), que personalicé con mi información, una iluminación más cálida y una identidad propia.",
+                        "Técnicamente, el sitio tiene dos partes: una escena 3D y este sistema operativo 2D. La escena usa Three.js para renderizar un escritorio modelado y horneado (baked) en Blender. La pantalla del computador es este sitio en React, incrustado mediante un iframe y transformado con el CSS3DRenderer de Three.js para dar la ilusión de que vive dentro del monitor."
+                    ],
+                    "highlights": [],
+                    "links": [
+                        {
+                            "label": "Repositorio original del sitio 3D (Henry Heffernan)",
+                            "url": "https://github.com/henryjeff/portfolio-website",
+                            "kind": "repository"
+                        },
+                        {
+                            "label": "Repositorio original del sistema operativo (Henry Heffernan)",
+                            "url": "https://github.com/henryjeff/portfolio-inner-site",
+                            "kind": "repository"
+                        },
+                        {
+                            "label": "Mi perfil de GitHub",
+                            "url": "https://github.com/OtroMigala",
+                            "kind": "github"
+                        }
+                    ],
+                    "images": []
+                },
+                {
+                    "id": "websites",
+                    "title": "Sitios web",
+                    "description": [
+                        "Además de mi trabajo en sistemas de información, he desarrollado páginas web para empresas y organizaciones:"
+                    ],
+                    "highlights": [
+                        "**Sonido Cárdenas** - Página web de la empresa, como trabajo independiente.",
+                        "**Semillero de Ingeniería Aeroespacial SIA** - Página web del semillero de la Universidad del Cauca, como trabajo independiente.",
+                        "**CIMDOL SAS** - Software y página web de la organización."
+                    ],
+                    "links": [],
+                    "images": []
+                }
+            ],
+            "icon": {
+                "url": "asset:pictures/projects/software.gif",
+                "alt": ""
+            }
+        },
+        {
+            "id": "aerospace",
+            "title": "Aeroespacial",
+            "subtitle": "CanSats y drones",
+            "intro": "Estos proyectos los he desarrollado principalmente con el capítulo estudiantil IEEE AESS de la Universidad del Cauca, del que soy vicepresidente desde febrero de 2025.",
+            "projects": [
+                {
+                    "id": "tulcan-sat",
+                    "title": "TULCAN-SAT",
+                    "context": "Curso-Concurso Mundial CanSat 2025 (UNAM)",
+                    "description": [
+                        "CubeSat 2U de código abierto con descenso controlado sin propulsión. La electrónica está basada en STM32, con telemetría LoRa y un controlador PID combinado con un Filtro de Kalman Extendido (EKF). Como líder de equipo, llevamos el proyecto al 8.º lugar del concurso mundial."
+                    ],
+                    "highlights": [],
+                    "links": [],
+                    "images": [
+                        {
+                            "url": "asset:pictures/projects/TULCANSAT.jpg",
+                            "alt": "Equipo TULCAN-SAT con sus uniformes durante la competencia, mostrando el CanSat dentro de un tubo rotulado TULCAN-SAT"
+                        }
+                    ],
+                    "logo": {
+                        "url": "asset:pictures/logos/Logo_TulcanSat.png",
+                        "alt": "TULCAN-SAT"
+                    }
+                },
+                {
+                    "id": "air-sat",
+                    "title": "AIR-SAT",
+                    "context": "ENMICE 2025 (Jalisco, México)",
+                    "description": [
+                        "Sistema tipo CanSat con un EKF optimizado para monitorear la calidad del aire y los contaminantes de escape de cohetes a gran altura. Obtuvo el 1.er lugar en la categoría Picosatélite – Carga Útil."
+                    ],
+                    "highlights": [],
+                    "links": [],
+                    "images": [
+                        {
+                            "url": "asset:pictures/projects/Air Sat.jpeg",
+                            "alt": "Equipo AIR-SAT en el escenario del 4.º Encuentro Mexicano de Ingeniería en Cohetería Experimental (ENMICE)"
+                        },
+                        {
+                            "url": "asset:pictures/projects/sateliteAirsat.jpeg",
+                            "alt": "El CanSat AIR-SAT: una carcasa roja impresa en 3D con el logo del equipo y el paracaídas plegado encima, junto a un peluche"
+                        }
+                    ]
+                },
+                {
+                    "id": "ticanor-drone",
+                    "title": "Navegación de dron agrícola",
+                    "context": "Proyecto DSTEI Ticanor (IEEE)",
+                    "description": [
+                        "Diseño de algoritmos de fusión sensorial con LiDAR, infrarrojo, acelerómetro y GPS para el subsistema de navegación de un dron de monitoreo agrícola, en un proyecto financiado por la iniciativa DSTEI de IEEE."
+                    ],
+                    "highlights": [],
+                    "links": [],
+                    "images": [
+                        {
+                            "url": "asset:pictures/projects/Ticanor1.jpeg",
+                            "alt": "Equipo Ticanor en una sala de reuniones con varios drones sobre la mesa y la propuesta de la fase 3 proyectada al fondo"
+                        },
+                        {
+                            "url": "asset:pictures/projects/Ticanor2.jpeg",
+                            "alt": "Integrantes del equipo Ticanor sostienen drones junto a un portátil, frente a la presentación del proyecto"
+                        }
+                    ]
+                },
+                {
+                    "id": "voices-of-water-and-earth",
+                    "title": "Voices of Water and Earth",
+                    "context": "EPICS in IEEE",
+                    "description": [
+                        "Nodos de comunicación con sensado y fusión de datos para comunidades indígenas Misak del Cauca. Lideré la gestión y consecución de 6.200 USD de financiamiento internacional para el proyecto."
+                    ],
+                    "highlights": [],
+                    "links": [],
+                    "images": []
+                },
+                {
+                    "id": "nasa-space-apps",
+                    "title": "NASA Space Apps Challenge",
+                    "context": "Ediciones 2024 y 2025",
+                    "description": [
+                        "Dirigí la organización del hackathon NASA Space Apps Challenge desde el capítulo."
+                    ],
+                    "highlights": [],
+                    "links": [],
+                    "images": [],
+                    "logo": {
+                        "url": "asset:pictures/logos/Square.png",
+                        "alt": "NASA Space Apps"
+                    }
+                }
+            ],
+            "icon": {
+                "url": "asset:pictures/projects/satellite.svg",
+                "alt": ""
+            },
+            "logo": {
+                "url": "asset:pictures/logos/aess.svg",
+                "alt": "IEEE AESS"
+            }
+        }
+    ],
+    "awards": [
+        {
+            "id": "isif-fusion",
+            "text": "Beca ISIF FUSION en 2025 (Río de Janeiro, Brasil) y 2026 (Trondheim, Noruega)."
+        },
+        {
+            "id": "cansat-2025",
+            "text": "8.º lugar en el Curso-Concurso Mundial CanSat 2025 (UNAM) con el equipo TULCAN-SAT."
+        },
+        {
+            "id": "enmice-2025",
+            "text": "1.er lugar en la categoría Picosatélite – Carga Útil de ENMICE 2025 (Jalisco, México) con el equipo AIR-SAT."
+        }
+    ],
+    "languages": [
+        {
+            "language": "Español",
+            "level": "Nativo"
+        },
+        {
+            "language": "Inglés",
+            "level": "B1"
+        }
+    ],
+    "contact": {
+        "intro": "Estoy disponible para proyectos freelance. Si tienes una oportunidad o una idea, escríbeme, ¡me encantaría conversar!",
+        "email": "juan_cardenas@qualityac.co",
+        "phoneDisplay": "+57 314 548 3972",
+        "whatsappUrl": "https://wa.me/573145483972",
+        "links": [
+            {
+                "label": "GitHub",
+                "url": "https://github.com/OtroMigala",
+                "kind": "github"
+            },
+            {
+                "label": "LinkedIn",
+                "url": "https://www.linkedin.com/in/juan-alejandro-cardenas-urbano-27ab452b4/",
+                "kind": "linkedin"
+            },
+            {
+                "label": "Instagram",
+                "url": "https://www.instagram.com/JaunAlejo/",
+                "kind": "instagram"
+            }
+        ]
+    }
+}

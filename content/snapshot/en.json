@@ -1,0 +1,366 @@
+{
+    "locale": "en",
+    "profile": {
+        "fullName": "Juan Alejandro Cárdenas Urbano",
+        "firstName": "Alejo",
+        "lastName": "Cárdenas",
+        "role": "Systems Engineer",
+        "tagline": "If you can imagine it, you can program it",
+        "location": "Popayán, Colombia",
+        "summary": [
+            "I study Systems Engineering at Universidad del Cauca in Popayán, Colombia, and work as a full stack developer. I am currently at EzLife, building government information systems with microservices in NestJS, Next.js and React.",
+            "Thanks for taking the time to explore my portfolio. I hope you enjoy it as much as I enjoyed building it. If you have questions, proposals or just want to say hi, write to me through [this form](#contact) or by email at [juan_cardenas@qualityac.co](mailto:juan_cardenas@qualityac.co)"
+        ],
+        "closing": [
+            "Thanks for reading about me! I hope you enjoy exploring the rest of JACUSys and everything it has to offer. And yes, the desktop games work.",
+            "If you have questions or comments, I would love to read them. You can write to me from the [contact page](#contact) or by email at [juan_cardenas@qualityac.co](mailto:juan_cardenas@qualityac.co)"
+        ],
+        "portrait": {
+            "url": "asset:pictures/alejo-retrato.jpg",
+            "alt": "Alejo smiling on a hill overlooking Trondheim, with its cathedral in the background",
+            "caption": "Me, Trondheim again"
+        },
+        "resume": {
+            "url": "asset:resume/CV_Juan_Alejandro_Cardenas.pdf",
+            "alt": "Résumé of Juan Alejandro Cárdenas Urbano (PDF, in Spanish)"
+        }
+    },
+    "about": [
+        {
+            "id": "about-me",
+            "heading": "About me",
+            "body": [
+                "My motto is simple: if you can imagine it, you can program it. I move between two worlds that overlap more than it seems: full stack software development, and embedded and aerospace systems. In one I work with Node.js, NestJS, PostgreSQL/PostGIS, Next.js and React; in the other, with C on STM32 microcontrollers, telemetry and Kalman filters.",
+                "I started Systems Engineering at Universidad del Cauca in 2021. Since then I have worked on migrating monolithic systems to microservices, on security and access control (RBAC), on automated testing with Jest and Playwright, and on building websites as a freelancer. The details are on my [experience](#experience) page.",
+                "Since February 2025 I have been vice president of the IEEE AESS Unicauca student chapter. There I have led the chapter's teams at the UNAM CanSat world competition and at ENMICE, and the organization of the NASA Space Apps Challenge hackathon. Those projects are on my [aerospace projects](#projects-aerospace) page."
+            ],
+            "image": {
+                "url": "asset:pictures/alejo-bebe.jpg",
+                "alt": "Alejo as a baby, standing in a playpen and reaching towards the camera",
+                "caption": "Me trying to delete the kernel without permission"
+            },
+            "imageAfter": 1
+        },
+        {
+            "id": "information-fusion",
+            "heading": "Information fusion",
+            "body": [
+                "My research interest is information fusion applied to navigation, drones/UAVs and state estimation. The International Society of Information Fusion (ISIF) awarded me the FUSION scholarship twice: in 2025 for the bootcamp in Rio de Janeiro, Brazil, and in 2026 for the bootcamp at the Norwegian University of Science and Technology (NTNU) in Trondheim, Norway."
+            ],
+            "logo": {
+                "url": "asset:pictures/logos/isif.png",
+                "alt": "ISIF"
+            },
+            "image": {
+                "url": "asset:pictures/alejo-trondheim.jpg",
+                "alt": "Alejo on the Gamle Bybro bridge in Trondheim, with the colourful wooden houses along the river behind him",
+                "caption": "Me, Trondheim"
+            },
+            "imageAfter": 1
+        }
+    ],
+    "experience": [
+        {
+            "id": "ezlife",
+            "organization": "EzLife",
+            "role": "Software Development Analyst",
+            "start": "2026",
+            "end": null,
+            "website": {
+                "label": "www.ezlife.com.co",
+                "url": "https://www.ezlife.com.co/",
+                "kind": "website"
+            },
+            "summary": "Design and implementation of government information systems with state- and role-based workflows. I work with NestJS, gRPC, Next.js, React 19 and Docker.",
+            "highlights": [
+                "Migration of monolithic systems to a NestJS microservice architecture, communicating over gRPC and HTTP behind an API Gateway.",
+                "Modernization of legacy web interfaces to Next.js and React 19, keeping their visual identity and connecting them to the new services.",
+                "State- and role-based workflows, legal deadlines in business days, official numbering and traceability of administrative acts.",
+                "Bulk management modules for official data: bulk uploads, inventories by territory, and automatic and manual assignment.",
+                "Detection and fixing of security and integrity flaws: identity spoofing, non-transactional operations, silent data loss between services, and file uploads.",
+                "Quality assurance with more than 300 unit tests in Jest and end-to-end tests with Playwright on full Docker environments.",
+                "Integration of parallel development branches and technical documentation: test reports, business decisions and deployment guides with data migrations."
+            ],
+            "images": [],
+            "logo": {
+                "url": "asset:pictures/logos/EzlifeLogo.png",
+                "alt": ""
+            }
+        },
+        {
+            "id": "cimdol",
+            "organization": "CIMDOL SAS",
+            "role": "Systems Engineer",
+            "start": "2025",
+            "end": null,
+            "highlights": [
+                "Software development and the organization's website.",
+                "Support with office hardware maintenance."
+            ],
+            "images": [],
+            "logo": {
+                "url": "asset:pictures/logos/logocimdol-CBjlnQpX.webp",
+                "alt": ""
+            }
+        },
+        {
+            "id": "dstei-ticanor",
+            "organization": "DSTEI Ticanor",
+            "role": "Systems Engineer",
+            "start": "2024",
+            "end": null,
+            "summary": "Project funded by the IEEE DSTEI initiative to build an agricultural monitoring drone.",
+            "highlights": [
+                "Design of sensor fusion algorithms (LiDAR, infrared, accelerometer and GPS) for the drone's navigation subsystem."
+            ],
+            "images": [
+                {
+                    "url": "asset:pictures/projects/Ticanor1.jpeg",
+                    "alt": "The Ticanor team in a meeting room with several drones on the table and the phase 3 proposal projected behind them"
+                },
+                {
+                    "url": "asset:pictures/projects/Ticanor2.jpeg",
+                    "alt": "Ticanor team members holding drones next to a laptop, in front of the project presentation"
+                }
+            ]
+        },
+        {
+            "id": "ieee-aess-unicauca",
+            "organization": "IEEE AESS Unicauca",
+            "role": "Vice President",
+            "start": "2025-02",
+            "end": null,
+            "summary": "Student chapter of the IEEE Aerospace and Electronic Systems Society at Universidad del Cauca.",
+            "highlights": [
+                "Led the fundraising that secured USD 6,200 for the \"Voices of Water and Earth\" project (EPICS in IEEE): communication nodes with sensing and data fusion for Misak Indigenous communities in Cauca.",
+                "Led the chapter's competition teams at the UNAM CanSat world competition, 2024 and 2025 editions.",
+                "Led the organization of the NASA Space Apps Challenge hackathon, 2024 and 2025 editions."
+            ],
+            "images": [
+                {
+                    "url": "asset:pictures/projects/juntaAESS.jpeg",
+                    "alt": "Members of the IEEE AESS Unicauca chapter wearing chapter T-shirts and holding an AESS Unicauca flag"
+                }
+            ],
+            "logo": {
+                "url": "asset:pictures/logos/aess.svg",
+                "alt": ""
+            }
+        },
+        {
+            "id": "freelance",
+            "organization": "Freelance",
+            "role": "Web Developer",
+            "dateLabel": "Independent",
+            "highlights": [
+                "Website for Sonido Cárdenas (company).",
+                "Website for the SIA Aerospace Engineering research group (Unicauca)."
+            ],
+            "images": []
+        }
+    ],
+    "projectCategories": [
+        {
+            "id": "software",
+            "title": "Software",
+            "subtitle": "Projects",
+            "intro": "These are some of the software projects I have worked on. My professional experience with government information systems is on the [experience](#experience) page.",
+            "projects": [
+                {
+                    "id": "jacusys",
+                    "title": "JACUSys",
+                    "description": [
+                        "JACUSys is my portfolio and the site you are on right now. It is an adaptation of Henry Heffernan's open source portfolio (MIT license), which I customized with my own information, warmer lighting and its own identity.",
+                        "Technically, the site has two parts: a 3D scene and this 2D operating system. The scene uses Three.js to render a desk modelled and baked in Blender. The computer screen is this React site, embedded through an iframe and transformed with the Three.js CSS3DRenderer to create the illusion that it lives inside the monitor."
+                    ],
+                    "highlights": [],
+                    "links": [
+                        {
+                            "label": "Original 3D site repository (Henry Heffernan)",
+                            "url": "https://github.com/henryjeff/portfolio-website",
+                            "kind": "repository"
+                        },
+                        {
+                            "label": "Original operating system repository (Henry Heffernan)",
+                            "url": "https://github.com/henryjeff/portfolio-inner-site",
+                            "kind": "repository"
+                        },
+                        {
+                            "label": "My GitHub profile",
+                            "url": "https://github.com/OtroMigala",
+                            "kind": "github"
+                        }
+                    ],
+                    "images": []
+                },
+                {
+                    "id": "websites",
+                    "title": "Websites",
+                    "description": [
+                        "Besides my work on information systems, I have built websites for companies and organizations:"
+                    ],
+                    "highlights": [
+                        "**Sonido Cárdenas** - Company website, as freelance work.",
+                        "**SIA Aerospace Engineering research group** - Website for the Universidad del Cauca research group, as freelance work.",
+                        "**CIMDOL SAS** - Software and website for the organization."
+                    ],
+                    "links": [],
+                    "images": []
+                }
+            ],
+            "icon": {
+                "url": "asset:pictures/projects/software.gif",
+                "alt": ""
+            }
+        },
+        {
+            "id": "aerospace",
+            "title": "Aerospace",
+            "subtitle": "CanSats and drones",
+            "intro": "I have built these projects mainly with the IEEE AESS student chapter at Universidad del Cauca, where I have been vice president since February 2025.",
+            "projects": [
+                {
+                    "id": "tulcan-sat",
+                    "title": "TULCAN-SAT",
+                    "context": "CanSat World Competition 2025 (UNAM)",
+                    "description": [
+                        "Open source 2U CubeSat with controlled descent and no propulsion. The electronics are based on STM32, with LoRa telemetry and a PID controller combined with an Extended Kalman Filter (EKF). As team lead, I took the project to 8th place in the world competition."
+                    ],
+                    "highlights": [],
+                    "links": [],
+                    "images": [
+                        {
+                            "url": "asset:pictures/projects/TULCANSAT.jpg",
+                            "alt": "The TULCAN-SAT team in uniform during the competition, showing the CanSat inside a tube labelled TULCAN-SAT"
+                        }
+                    ],
+                    "logo": {
+                        "url": "asset:pictures/logos/Logo_TulcanSat.png",
+                        "alt": "TULCAN-SAT"
+                    }
+                },
+                {
+                    "id": "air-sat",
+                    "title": "AIR-SAT",
+                    "context": "ENMICE 2025 (Jalisco, Mexico)",
+                    "description": [
+                        "CanSat-type system with an optimized EKF to monitor air quality and rocket exhaust pollutants at high altitude. It won 1st place in the Picosatellite – Payload category."
+                    ],
+                    "highlights": [],
+                    "links": [],
+                    "images": [
+                        {
+                            "url": "asset:pictures/projects/Air Sat.jpeg",
+                            "alt": "The AIR-SAT team on stage at the 4th Mexican Meeting of Experimental Rocketry Engineering (ENMICE)"
+                        },
+                        {
+                            "url": "asset:pictures/projects/sateliteAirsat.jpeg",
+                            "alt": "The AIR-SAT CanSat: a red 3D-printed shell with the team logo and the folded parachute on top, next to a plush toy"
+                        }
+                    ]
+                },
+                {
+                    "id": "ticanor-drone",
+                    "title": "Agricultural drone navigation",
+                    "context": "DSTEI Ticanor project (IEEE)",
+                    "description": [
+                        "Design of sensor fusion algorithms with LiDAR, infrared, accelerometer and GPS for the navigation subsystem of an agricultural monitoring drone, in a project funded by the IEEE DSTEI initiative."
+                    ],
+                    "highlights": [],
+                    "links": [],
+                    "images": [
+                        {
+                            "url": "asset:pictures/projects/Ticanor1.jpeg",
+                            "alt": "The Ticanor team in a meeting room with several drones on the table and the phase 3 proposal projected behind them"
+                        },
+                        {
+                            "url": "asset:pictures/projects/Ticanor2.jpeg",
+                            "alt": "Ticanor team members holding drones next to a laptop, in front of the project presentation"
+                        }
+                    ]
+                },
+                {
+                    "id": "voices-of-water-and-earth",
+                    "title": "Voices of Water and Earth",
+                    "context": "EPICS in IEEE",
+                    "description": [
+                        "Communication nodes with sensing and data fusion for Misak Indigenous communities in Cauca. I led the fundraising that secured USD 6,200 in international funding for the project."
+                    ],
+                    "highlights": [],
+                    "links": [],
+                    "images": []
+                },
+                {
+                    "id": "nasa-space-apps",
+                    "title": "NASA Space Apps Challenge",
+                    "context": "2024 and 2025 editions",
+                    "description": [
+                        "I led the organization of the NASA Space Apps Challenge hackathon from the chapter."
+                    ],
+                    "highlights": [],
+                    "links": [],
+                    "images": [],
+                    "logo": {
+                        "url": "asset:pictures/logos/Square.png",
+                        "alt": "NASA Space Apps"
+                    }
+                }
+            ],
+            "icon": {
+                "url": "asset:pictures/projects/satellite.svg",
+                "alt": ""
+            },
+            "logo": {
+                "url": "asset:pictures/logos/aess.svg",
+                "alt": "IEEE AESS"
+            }
+        }
+    ],
+    "awards": [
+        {
+            "id": "isif-fusion",
+            "text": "ISIF FUSION scholarship in 2025 (Rio de Janeiro, Brazil) and 2026 (Trondheim, Norway)."
+        },
+        {
+            "id": "cansat-2025",
+            "text": "8th place at the CanSat World Competition 2025 (UNAM) with the TULCAN-SAT team."
+        },
+        {
+            "id": "enmice-2025",
+            "text": "1st place in the Picosatellite – Payload category at ENMICE 2025 (Jalisco, Mexico) with the AIR-SAT team."
+        }
+    ],
+    "languages": [
+        {
+            "language": "Spanish",
+            "level": "Native"
+        },
+        {
+            "language": "English",
+            "level": "B1"
+        }
+    ],
+    "contact": {
+        "intro": "I am available for freelance projects. If you have an opportunity or an idea, write to me. I would love to talk!",
+        "email": "juan_cardenas@qualityac.co",
+        "phoneDisplay": "+57 314 548 3972",
+        "whatsappUrl": "https://wa.me/573145483972",
+        "links": [
+            {
+                "label": "GitHub",
+                "url": "https://github.com/OtroMigala",
+                "kind": "github"
+            },
+            {
+                "label": "LinkedIn",
+                "url": "https://www.linkedin.com/in/juan-alejandro-cardenas-urbano-27ab452b4/",
+                "kind": "linkedin"
+            },
+            {
+                "label": "Instagram",
+                "url": "https://www.instagram.com/JaunAlejo/",
+                "kind": "instagram"
+            }
+        ]
+    }
+}
