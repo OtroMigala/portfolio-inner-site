@@ -47,6 +47,27 @@ code {
     user-select: none;
 }
 
+/* The OS chrome stays unselectable, but portfolio text (an email address, a
+   project name) and form fields must be selectable and copyable. */
+.site-page-content,
+.site-page-content *,
+input,
+textarea {
+    -webkit-touch-callout: default;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* Two-tone focus ring: the black outline shows on white and teal, the white
+   halo on the blue title bar and dark buttons. */
+:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 1px;
+    box-shadow: 0 0 0 4px #fff;
+}
+
 p,
 h1,
 h2,
@@ -170,11 +191,11 @@ textarea {
     box-shadow: var(--border-field);
 }
 
+/* The yellow fill is kept as a hint; the focus ring above is the indicator. */
 textarea:focus,
 textarea:active,
 input:focus,
 input:active {
-    outline: none;
     background-color: #fbffc4;
 }
 
