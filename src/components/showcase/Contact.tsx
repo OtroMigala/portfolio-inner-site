@@ -7,6 +7,9 @@ import profile from '../../constants/profile';
 
 export interface ContactProps {}
 
+// #ff0000 on white is 4.0:1; this red reaches 5.9:1 for the small error text.
+const ERROR_RED = '#c00000';
+
 // function to validate email
 const validateEmail = (email: string) => {
     const re =
@@ -45,6 +48,7 @@ const Contact: React.FC<ContactProps> = (props) => {
     const [isFormValid, setIsFormValid] = useState(false);
     const [formMessage, setFormMessage] = useState('');
     const [formMessageColor, setFormMessageColor] = useState('');
+    const [showErrors, setShowErrors] = useState(false);
 
     useEffect(() => {
         if (validateEmail(email) && name.length > 0 && message.length > 0) {
@@ -57,8 +61,9 @@ const Contact: React.FC<ContactProps> = (props) => {
     // No backend yet: hand the message to the visitor's mail client.
     function submitForm() {
         if (!isFormValid) {
+            setShowErrors(true);
             setFormMessage('Revisa los campos marcados e inténtalo de nuevo.');
-            setFormMessageColor(colors.red);
+            setFormMessageColor(ERROR_RED);
             return;
         }
         const subject = `Contacto desde el portafolio: ${name}${
@@ -134,75 +139,106 @@ const Contact: React.FC<ContactProps> = (props) => {
                     </p>
                 )}
 
-                <div style={styles.form}>
-                    <label>
+                <form
+                    style={styles.form}
+                    noValidate
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        submitForm();
+                    }}
+                >
+                    <label htmlFor="contact-name">
                         <p>
-                            {!name && <span style={styles.star}>*</span>}
+                            {!name && (
+                                <span style={styles.star} aria-hidden="true">
+                                    *
+                                </span>
+                            )}
                             <b>Tu nombre:</b>
                         </p>
                     </label>
                     <input
+                        id="contact-name"
                         style={styles.formItem}
                         type="text"
                         name="name"
+                        autoComplete="name"
+                        required
+                        aria-invalid={showErrors && !name}
                         placeholder="Nombre"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
-                    <label>
+                    <label htmlFor="contact-email">
                         <p>
                             {!validateEmail(email) && (
-                                <span style={styles.star}>*</span>
+                                <span style={styles.star} aria-hidden="true">
+                                    *
+                                </span>
                             )}
                             <b>Correo:</b>
                         </p>
                     </label>
                     <input
+                        id="contact-email"
                         style={styles.formItem}
                         type="email"
                         name="email"
+                        autoComplete="email"
+                        required
+                        aria-invalid={showErrors && !validateEmail(email)}
                         placeholder="Correo"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <label>
+                    <label htmlFor="contact-company">
                         <p>
                             <b>Empresa (opcional):</b>
                         </p>
                     </label>
                     <input
+                        id="contact-company"
                         style={styles.formItem}
-                        type="company"
+                        type="text"
                         name="company"
+                        autoComplete="organization"
                         placeholder="Empresa"
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
                     />
-                    <label>
+                    <label htmlFor="contact-message">
                         <p>
-                            {!message && <span style={styles.star}>*</span>}
+                            {!message && (
+                                <span style={styles.star} aria-hidden="true">
+                                    *
+                                </span>
+                            )}
                             <b>Mensaje:</b>
                         </p>
                     </label>
                     <textarea
+                        id="contact-message"
                         name="message"
+                        required
+                        aria-invalid={showErrors && !message}
                         placeholder="Mensaje"
                         style={styles.formItem}
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                     />
                     <div style={styles.buttons}>
+                        {/* Not disabled: a disabled button cannot be focused,
+                            so keyboard users would never learn what is missing. */}
                         <button
                             className="site-button"
                             style={styles.button}
                             type="submit"
-                            disabled={!isFormValid}
-                            onMouseDown={submitForm}
                         >
                             Enviar mensaje
                         </button>
                         <div style={styles.formInfo}>
                             <p
+                                role="status"
                                 style={Object.assign(
                                     {},
                                     { color: formMessageColor }
@@ -230,7 +266,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                             </p>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
             <ResumeDownload altText="¿Necesitas una copia de mi hoja de vida?" />
         </main>
@@ -239,6 +275,8 @@ const Contact: React.FC<ContactProps> = (props) => {
 
 const styles: StyleSheetCSS = {
     form: {
+        // <form> does not get the global `div { display: flex }` rule.
+        display: 'flex',
         flexDirection: 'column',
         marginTop: 32,
     },
@@ -263,7 +301,7 @@ const styles: StyleSheetCSS = {
     },
     star: {
         paddingRight: 4,
-        color: 'red',
+        color: ERROR_RED,
     },
     button: {
         minWidth: 184,
