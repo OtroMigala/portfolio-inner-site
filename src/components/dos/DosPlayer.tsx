@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { DosPlayer as Instance, DosPlayerFactoryType } from 'js-dos';
+import loadJsDos from './loadJsDos';
 
 declare const Dos: DosPlayerFactoryType;
 
@@ -21,17 +22,24 @@ export default function DosPlayer(props: PlayerProps) {
         }
 
         const root = rootRef.current as HTMLDivElement;
-        const instance = Dos(root);
+        let instance: Instance | null = null;
+        let cancelled = false;
 
-        setDos(instance);
-        const elements = rootRef.current.getElementsByClassName('flex-grow-0');
+        loadJsDos().then(() => {
+            if (cancelled) return;
+            instance = Dos(root);
 
-        while (elements.length > 0) {
-            elements[0].remove();
-        }
+            setDos(instance);
+            const elements = root.getElementsByClassName('flex-grow-0');
+
+            while (elements.length > 0) {
+                elements[0].remove();
+            }
+        });
 
         return () => {
-            instance.stop();
+            cancelled = true;
+            instance?.stop();
         };
     }, [rootRef]);
 
