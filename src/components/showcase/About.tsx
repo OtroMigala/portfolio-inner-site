@@ -49,7 +49,7 @@ const About: React.FC<AboutProps> = (props) => {
                 </p>
                 <br />
                 <div className="captioned-image">
-                    <img src={meBaby} style={styles.image} alt="" />
+                    <img src={meBaby} style={styles.image} alt="Alejo de bebé, de pie en un corral, estirando la mano hacia la cámara" />
                     <p>
                         <sub>
                             Yo intentando borrar el kernel sin permiso
@@ -92,7 +92,7 @@ const About: React.FC<AboutProps> = (props) => {
                 </p>
                 <br />
                 <div className="captioned-image">
-                    <img src={meTrondheim} style={styles.image} alt="" />
+                    <img src={meTrondheim} style={styles.image} alt="Alejo sobre el puente Gamle Bybro de Trondheim, con las casas de madera de colores junto al río al fondo" />
                     <p>
                         <sub>
                             Yo, Trondheim
@@ -137,7 +137,7 @@ const About: React.FC<AboutProps> = (props) => {
                         <p>Español nativo e inglés B1.</p>
                     </div>
                     <div style={styles.verticalImage}>
-                        <img src={meNow} style={styles.image} alt="" />
+                        <img src={meNow} style={styles.image} alt="Alejo sonriendo en una colina con vista a Trondheim y su catedral al fondo" />
                         <p>
                             <sub>
                                 Yo, Trondheim otra vez

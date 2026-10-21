@@ -36,7 +36,7 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
                     de Kalman Extendido (EKF). Como líder de equipo, llevamos el
                     proyecto al 8.º lugar del concurso mundial.
                 </p>
-                <img src={tulcanSat} style={styles.image} alt="" />
+                <img src={tulcanSat} style={styles.image} alt="Equipo TULCAN-SAT con sus uniformes durante la competencia, mostrando el CanSat dentro de un tubo rotulado TULCAN-SAT" />
             </div>
             <div className="text-block">
                 <h2>AIR-SAT</h2>
@@ -48,8 +48,8 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
                     gran altura. Obtuvo el 1.er lugar en la categoría
                     Picosatélite – Carga Útil.
                 </p>
-                <img src={airSat} style={styles.image} alt="" />
-                <img src={airSatSatellite} style={styles.image} alt="" />
+                <img src={airSat} style={styles.image} alt="Equipo AIR-SAT en el escenario del 4.º Encuentro Mexicano de Ingeniería en Cohetería Experimental (ENMICE)" />
+                <img src={airSatSatellite} style={styles.image} alt="El CanSat AIR-SAT: una carcasa roja impresa en 3D con el logo del equipo y el paracaídas plegado encima, junto a un peluche" />
             </div>
             <div className="text-block">
                 <h2>Navegación de dron agrícola</h2>
@@ -61,8 +61,8 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
                     navegación de un dron de monitoreo agrícola, en un proyecto
                     financiado por la iniciativa DSTEI de IEEE.
                 </p>
-                <img src={ticanor1} style={styles.image} alt="" />
-                <img src={ticanor2} style={styles.image} alt="" />
+                <img src={ticanor1} style={styles.image} alt="Equipo Ticanor en una sala de reuniones con varios drones sobre la mesa y la propuesta de la fase 3 proyectada al fondo" />
+                <img src={ticanor2} style={styles.image} alt="Integrantes del equipo Ticanor sostienen drones junto a un portátil, frente a la presentación del proyecto" />
             </div>
             <div className="text-block">
                 <h2>Voices of Water and Earth</h2>

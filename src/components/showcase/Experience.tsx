@@ -162,8 +162,8 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                         </p>
                     </li>
                 </ul>
-                <img src={ticanor1} style={styles.image} alt="" />
-                <img src={ticanor2} style={styles.image} alt="" />
+                <img src={ticanor1} style={styles.image} alt="Equipo Ticanor en una sala de reuniones con varios drones sobre la mesa y la propuesta de la fase 3 proyectada al fondo" />
+                <img src={ticanor2} style={styles.image} alt="Integrantes del equipo Ticanor sostienen drones junto a un portátil, frente a la presentación del proyecto" />
             </div>
             <ExperienceHeader
                 company="IEEE AESS Unicauca"
@@ -200,7 +200,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                         </p>
                     </li>
                 </ul>
-                <img src={juntaAESS} style={styles.image} alt="" />
+                <img src={juntaAESS} style={styles.image} alt="Integrantes del capítulo IEEE AESS Unicauca con camisetas del capítulo, sosteniendo una bandera de AESS Unicauca" />
             </div>
             <ExperienceHeader
                 company="Freelance"

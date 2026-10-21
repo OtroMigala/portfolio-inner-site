@@ -260,7 +260,7 @@ const ShutdownSequence: React.FC<ShutdownSequenceProps> = ({
 
     return ee ? (
         <div style={styles.imageContainer}>
-            <img src={eePic} style={styles.img} alt="" />
+            <img src={eePic} style={styles.img} alt={"Meme con un pollito y huevos de Pascua: \"Congratulations! You beat the Easter Egg. You overcame adversity and didn't let the computer beat you. You are one cool cat.\""} />
         </div>
     ) : loading ? (
         <div style={styles.shutdown}>
@@ -268,7 +268,7 @@ const ShutdownSequence: React.FC<ShutdownSequenceProps> = ({
         </div>
     ) : numShutdowns === 10 ? (
         <div style={styles.imageContainer}>
-            <img src={neverGiveUp} style={styles.img} alt="" />
+            <img src={neverGiveUp} style={styles.img} alt={"Pieza de rey de ajedrez en pie entre piezas caídas, con el texto \"Never give up. Your victory is right around the corner.\""} />
         </div>
     ) : (
         <div style={styles.shutdown}>
