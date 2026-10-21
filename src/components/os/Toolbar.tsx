@@ -50,16 +50,12 @@ const Toolbar: React.FC<ToolbarProps> = ({
 
     const [time, setTime] = useState(getTime());
 
-    const updateTime = () => {
-        setTime(getTime());
-        setTimeout(() => {
-            updateTime();
-        }, 5000);
-    };
-
+    // One interval for the component's lifetime. The previous effect had no
+    // dependency list, so every render started another endless timer chain.
     useEffect(() => {
-        updateTime();
-    });
+        const interval = setInterval(() => setTime(getTime()), 5000);
+        return () => clearInterval(interval);
+    }, []);
 
     // Close the start menu when clicking anywhere outside it.
     useEffect(() => {
