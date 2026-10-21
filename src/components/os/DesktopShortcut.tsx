@@ -6,66 +6,55 @@ import { Icon } from '../general';
 export interface DesktopShortcutProps {
     icon: IconName;
     shortcutName: string;
+    appKey?: string;
     invertText?: boolean;
     onOpen: () => void;
 }
 
+// Mouse: click selects, double click opens (like Windows 95).
+// Keyboard: it is a real button, so Enter or Space opens the app directly.
 const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
     icon,
     shortcutName,
+    appKey,
     invertText,
     onOpen,
 }) => {
     const [isSelected, setIsSelected] = useState(false);
-    const [shortcutId, setShortcutId] = useState('');
     const [lastSelected, setLastSelected] = useState(false);
-    const containerRef = useRef<any>();
+    const containerRef = useRef<HTMLButtonElement>(null);
 
     const [scaledStyle, setScaledStyle] = useState({});
 
     const requiredIcon = require(`../../assets/icons/${icon}.png`);
     const [doubleClickTimerActive, setDoubleClickTimerActive] = useState(false);
 
-    const getShortcutId = useCallback(() => {
-        const shortcutId = shortcutName.replace(/\s/g, '');
-        return `desktop-shortcut-${shortcutId}`;
-    }, [shortcutName]);
-
-    useEffect(() => {
-        setShortcutId(getShortcutId());
-    }, [shortcutName, getShortcutId]);
-
     useEffect(() => {
         if (containerRef.current && Object.keys(scaledStyle).length === 0) {
-            //@ts-ignore
             const boundingBox = containerRef.current.getBoundingClientRect();
             setScaledStyle({
                 transformOrigin: 'center',
                 transform: 'scale(1.5)',
                 left: boundingBox.width / 4,
                 top: boundingBox.height / 4,
-                // transform: 'scale(1.5)',
-                // left: boundingBox.width / 4,
-                // top: boundingBox.height / 4,
             });
         }
     }, [scaledStyle]);
 
     const handleClickOutside = useCallback(
         (event: MouseEvent) => {
-            // @ts-ignore
-            const targetId = event.target.id;
-            if (targetId !== shortcutId) {
+            const target = event.target as Node | null;
+            if (!target || !containerRef.current?.contains(target)) {
                 setIsSelected(false);
             }
             if (!isSelected && lastSelected) {
                 setLastSelected(false);
             }
         },
-        [isSelected, setIsSelected, setLastSelected, lastSelected, shortcutId]
+        [isSelected, setIsSelected, setLastSelected, lastSelected]
     );
 
-    const handleClickShortcut = useCallback(() => {
+    const handleMouseDown = useCallback(() => {
         if (doubleClickTimerActive) {
             onOpen && onOpen();
             setIsSelected(false);
@@ -81,6 +70,11 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
         }, 300);
     }, [doubleClickTimerActive, setIsSelected, onOpen]);
 
+    // A click with detail 0 was triggered by Enter/Space, not by a pointer.
+    const handleClick = (event: React.MouseEvent) => {
+        if (event.detail === 0) onOpen && onOpen();
+    };
+
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
@@ -89,15 +83,16 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
     }, [isSelected, handleClickOutside]);
 
     return (
-        <div
-            id={`${shortcutId}`}
+        <button
+            type="button"
+            data-desktop-shortcut={appKey}
             style={Object.assign({}, styles.appShortcut, scaledStyle)}
-            onMouseDown={handleClickShortcut}
+            onMouseDown={handleMouseDown}
+            onClick={handleClick}
             ref={containerRef}
         >
-            <div id={`${shortcutId}`} style={styles.iconContainer}>
-                <div
-                    id={`${shortcutId}`}
+            <span style={styles.iconContainer}>
+                <span
                     className="desktop-shortcut-icon"
                     style={Object.assign(
                         {},
@@ -109,8 +104,8 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
                     )}
                 />
                 <Icon icon={icon} style={styles.icon} />
-            </div>
-            <div
+            </span>
+            <span
                 className={
                     isSelected
                         ? 'selected-shortcut-border'
@@ -118,11 +113,13 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
                         ? 'shortcut-border'
                         : ''
                 }
-                id={`${shortcutId}`}
-                style={isSelected ? { backgroundColor: colors.blue } : {}}
+                style={Object.assign(
+                    {},
+                    styles.labelContainer,
+                    isSelected ? { backgroundColor: colors.blue } : {}
+                )}
             >
-                <p
-                    id={`${shortcutId}`}
+                <span
                     style={Object.assign(
                         {},
                         styles.shortcutText,
@@ -130,9 +127,9 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
                     )}
                 >
                     {shortcutName}
-                </p>
-            </div>
-        </div>
+                </span>
+            </span>
+        </button>
     );
 };
 
@@ -140,13 +137,19 @@ const styles: StyleSheetCSS = {
     appShortcut: {
         position: 'absolute',
         width: 56,
+        display: 'flex',
+        padding: 0,
+        background: 'none',
+        border: 'none',
 
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
         textAlign: 'center',
+        cursor: 'pointer',
     },
     shortcutText: {
+        display: 'block',
         cursor: 'pointer',
         textOverflow: 'wrap',
         fontFamily: 'MSSerif',
@@ -155,7 +158,12 @@ const styles: StyleSheetCSS = {
         paddingRight: 2,
         paddingLeft: 2,
     },
+    labelContainer: {
+        display: 'flex',
+    },
     iconContainer: {
+        display: 'flex',
+        position: 'relative',
         cursor: 'pointer',
         paddingBottom: 3,
     },

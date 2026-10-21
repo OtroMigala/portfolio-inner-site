@@ -29,7 +29,10 @@ const Toolbar: React.FC<ToolbarProps> = ({
     };
 
     const [startWindowOpen, setStartWindowOpen] = useState(false);
-    const lastClickInside = useRef(false);
+    const startAreaRef = useRef<HTMLDivElement>(null);
+    const startButtonRef = useRef<HTMLButtonElement>(null);
+    const firstOptionRef = useRef<HTMLButtonElement>(null);
+    const [focusMenuOnOpen, setFocusMenuOnOpen] = useState(false);
 
     const [lastActive, setLastActive] = useState('');
 
@@ -58,77 +61,94 @@ const Toolbar: React.FC<ToolbarProps> = ({
         updateTime();
     });
 
-    const onCheckClick = () => {
-        if (lastClickInside.current) {
-            setStartWindowOpen(true);
-        } else {
-            setStartWindowOpen(false);
-        }
-        lastClickInside.current = false;
-    };
-
+    // Close the start menu when clicking anywhere outside it.
     useEffect(() => {
-        window.addEventListener('mousedown', onCheckClick, false);
+        const onMouseDown = (event: MouseEvent) => {
+            const target = event.target as Node | null;
+            if (!target || !startAreaRef.current?.contains(target)) {
+                setStartWindowOpen(false);
+            }
+        };
+        window.addEventListener('mousedown', onMouseDown, false);
         return () => {
-            window.removeEventListener('mousedown', onCheckClick, false);
+            window.removeEventListener('mousedown', onMouseDown, false);
         };
     }, []);
 
-    const onStartWindowClicked = () => {
-        setStartWindowOpen(true);
-        lastClickInside.current = true;
+    useEffect(() => {
+        if (startWindowOpen && focusMenuOnOpen) {
+            firstOptionRef.current?.focus();
+            setFocusMenuOnOpen(false);
+        }
+    }, [startWindowOpen, focusMenuOnOpen]);
+
+    const toggleStartWindow = (event: React.MouseEvent) => {
+        // Opened with Enter/Space: move focus into the menu.
+        if (!startWindowOpen && event.detail === 0) setFocusMenuOnOpen(true);
+        setStartWindowOpen(!startWindowOpen);
     };
 
-    const toggleStartWindow = () => {
-        if (!startWindowOpen) {
-            lastClickInside.current = true;
-        } else {
-            lastClickInside.current = false;
+    const onStartAreaKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === 'Escape' && startWindowOpen) {
+            // Keep Escape from also leaving the computer in the 3D site.
+            event.stopPropagation();
+            setStartWindowOpen(false);
+            startButtonRef.current?.focus();
         }
     };
 
     return (
-        <div style={styles.toolbarOuter}>
-            {startWindowOpen && (
-                <div
-                    onMouseDown={onStartWindowClicked}
-                    style={styles.startWindow}
-                >
-                    <div style={styles.startWindowInner}>
-                        <div style={styles.verticalStartContainer}>
-                            <p style={styles.verticalText}>JACUSys</p>
-                        </div>
-                        <div style={styles.startWindowContent}>
-                            <div style={styles.startMenuSpace} />
-                            <div style={styles.startMenuLine} />
+        <nav aria-label="Barra de tareas" style={styles.toolbarOuter}>
+            <div ref={startAreaRef} onKeyDown={onStartAreaKeyDown}>
+                {startWindowOpen && (
+                    <div id="start-menu" style={styles.startWindow}>
+                        <div style={styles.startWindowInner}>
                             <div
-                                className="start-menu-option"
-                                style={styles.startMenuOption}
-                                onMouseDown={shutdown}
+                                style={styles.verticalStartContainer}
+                                aria-hidden="true"
                             >
-                                <Icon
-                                    style={styles.startMenuIcon}
-                                    icon="computerBig"
-                                />
-                                <p style={styles.startMenuText}>
-                                    <u>A</u>pagar...
-                                </p>
+                                <p style={styles.verticalText}>JACUSys</p>
+                            </div>
+                            <div style={styles.startWindowContent}>
+                                <div style={styles.startMenuSpace} />
+                                <div style={styles.startMenuLine} />
+                                <button
+                                    type="button"
+                                    ref={firstOptionRef}
+                                    className="start-menu-option"
+                                    style={styles.startMenuOption}
+                                    onClick={shutdown}
+                                >
+                                    <Icon
+                                        style={styles.startMenuIcon}
+                                        icon="computerBig"
+                                    />
+                                    <span style={styles.startMenuText}>
+                                        <u>A</u>pagar...
+                                    </span>
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
             <div style={styles.toolbarInner}>
                 <div style={styles.toolbar}>
-                    <div
+                    <button
+                        type="button"
+                        ref={startButtonRef}
+                        aria-expanded={startWindowOpen}
+                        aria-controls="start-menu"
                         style={Object.assign(
                             {},
                             styles.startContainerOuter,
                             startWindowOpen && styles.activeTabOuter
                         )}
-                        onMouseDown={toggleStartWindow}
+                        onMouseDown={(e) => e.stopPropagation()}
+                        onClick={toggleStartWindow}
+                        onKeyDown={onStartAreaKeyDown}
                     >
-                        <div
+                        <span
                             style={Object.assign(
                                 {},
                                 styles.startContainer,
@@ -140,30 +160,30 @@ const Toolbar: React.FC<ToolbarProps> = ({
                                 icon="windowsStartIcon"
                                 style={styles.startIcon}
                             />
-                            <p className="toolbar-text ">Inicio</p>
-                        </div>
-                    </div>
+                            <span className="toolbar-text ">Inicio</span>
+                        </span>
+                    </button>
                     <div style={styles.toolbarTabsContainer}>
                         {Object.keys(windows).map((key) => {
+                            const active =
+                                lastActive === key && !windows[key].minimized;
                             return (
-                                <div
+                                <button
+                                    type="button"
                                     key={key}
+                                    aria-pressed={active}
                                     style={Object.assign(
                                         {},
                                         styles.tabContainerOuter,
-                                        lastActive === key &&
-                                            !windows[key].minimized &&
-                                            styles.activeTabOuter
+                                        active && styles.activeTabOuter
                                     )}
-                                    onMouseDown={() => toggleMinimize(key)}
+                                    onClick={() => toggleMinimize(key)}
                                 >
-                                    <div
+                                    <span
                                         style={Object.assign(
                                             {},
                                             styles.tabContainer,
-                                            lastActive === key &&
-                                                !windows[key].minimized &&
-                                                styles.activeTabInner
+                                            active && styles.activeTabInner
                                         )}
                                     >
                                         <Icon
@@ -171,11 +191,11 @@ const Toolbar: React.FC<ToolbarProps> = ({
                                             icon={windows[key].icon}
                                             style={styles.tabIcon}
                                         />
-                                        <p style={styles.tabText}>
+                                        <span style={styles.tabText}>
                                             {windows[key].name}
-                                        </p>
-                                    </div>
-                                </div>
+                                        </span>
+                                    </span>
+                                </button>
                             );
                         })}
                     </div>
@@ -185,12 +205,14 @@ const Toolbar: React.FC<ToolbarProps> = ({
                     <p style={styles.timeText}>{time}</p>
                 </div>
             </div>
-        </div>
+        </nav>
     );
 };
 
 const styles: StyleSheetCSS = {
     toolbarOuter: {
+        // <nav> does not get the global `div { display: flex }` rule.
+        display: 'flex',
         boxSizing: 'border-box',
         position: 'absolute',
         bottom: 0,
@@ -263,6 +285,12 @@ const styles: StyleSheetCSS = {
         marginLeft: 8,
     },
     startMenuOption: {
+        display: 'flex',
+        width: '100%',
+        background: 'none',
+        border: 'none',
+        textAlign: 'left',
+        boxSizing: 'content-box',
         alignItems: 'center',
         // flex: 1,
         height: 24,
@@ -290,6 +318,8 @@ const styles: StyleSheetCSS = {
     },
     tabContainerOuter: {
         display: 'flex',
+        padding: 0,
+        background: 'none',
         flex: 1,
         maxWidth: 300,
         marginRight: 4,
@@ -301,6 +331,7 @@ const styles: StyleSheetCSS = {
     },
     tabContainer: {
         display: 'flex',
+        minWidth: 0,
         border: `1px solid ${Colors.lightGray}`,
         borderBottomColor: Colors.darkGray,
         borderRightColor: Colors.darkGray,
@@ -312,6 +343,7 @@ const styles: StyleSheetCSS = {
         marginRight: 6,
     },
     startContainer: {
+        display: 'flex',
         alignItems: 'center',
         flexShrink: 1,
         // background: 'red',
@@ -323,6 +355,9 @@ const styles: StyleSheetCSS = {
         paddingRight: 5,
     },
     startContainerOuter: {
+        display: 'flex',
+        padding: 0,
+        background: 'none',
         marginLeft: 3,
         boxSizing: 'border-box',
         cursor: 'pointer',
@@ -369,6 +404,9 @@ const styles: StyleSheetCSS = {
         height: 18,
     },
     tabText: {
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
         fontSize: 14,
         fontFamily: 'MSSerif',
     },

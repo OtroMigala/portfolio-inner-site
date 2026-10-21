@@ -6,10 +6,12 @@ import { Icon } from '../general';
 export interface ButtonProps {
     icon?: IconName;
     text?: string;
+    /** Accessible name; required when the button only shows an icon. */
+    label?: string;
     onClick?: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ icon, text, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ icon, text, label, onClick }) => {
     const [isHovering, setIsHovering] = useState(false);
 
     const handleMouseEnter = () => {
@@ -33,19 +35,17 @@ const Button: React.FC<ButtonProps> = ({ icon, text, onClick }) => {
         text && { padding: 4 }
     );
 
-    const click = (e: any) => {
-        e.preventDefault();
-        onClick && onClick();
-    };
-
     return (
-        <div
+        <button
+            type="button"
+            aria-label={label}
+            title={label}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             style={outerBorderStyle}
-            onMouseDown={click}
+            onClick={() => onClick && onClick()}
         >
-            <div
+            <span
                 style={Object.assign(
                     {},
                     isHovering && { backgroundColor: Colors.darkGray },
@@ -53,19 +53,16 @@ const Button: React.FC<ButtonProps> = ({ icon, text, onClick }) => {
                 )}
             >
                 {icon && <Icon icon={icon} style={styles.icon} />}
-                {text && (
-                    // <Text noSelect style={styles.text}>
-                    //     {text}
-                    // </Text>
-                    <p>{text}</p>
-                )}
-            </div>
-        </div>
+                {text && <span>{text}</span>}
+            </span>
+        </button>
     );
 };
 
 const styles: StyleSheetCSS = {
     outerBorder: {
+        display: 'flex',
+        padding: 0,
         border: `1px solid ${Colors.black}`,
         borderTopColor: Colors.white,
         borderLeftColor: Colors.white,
@@ -74,6 +71,7 @@ const styles: StyleSheetCSS = {
         cursor: 'pointer',
     },
     innerBorder: {
+        display: 'flex',
         border: `1px solid ${Colors.darkGray}`,
         borderTopColor: Colors.lightGray,
         borderLeftColor: Colors.lightGray,

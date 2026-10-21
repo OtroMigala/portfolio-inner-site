@@ -24,6 +24,8 @@ export interface WindowProps {
     onHeightChange?: (height: number) => void;
 }
 
+let windowCount = 0;
+
 const Window: React.FC<WindowProps> = (props) => {
     const windowRef = useRef<any>(null);
     const dragRef = useRef<any>(null);
@@ -59,6 +61,17 @@ const Window: React.FC<WindowProps> = (props) => {
 
     const [isDragging, setIsDragging] = useState(false);
     const [isResizing, setIsResizing] = useState(false);
+
+    const titleId = useRef(`window-title-${++windowCount}`);
+
+    // Opened from the keyboard (focus is on a desktop shortcut): move focus
+    // into the new window so the user lands where the content is.
+    useEffect(() => {
+        const active = document.activeElement;
+        if (active && active.closest('[data-desktop-shortcut]')) {
+            windowRef.current?.focus();
+        }
+    }, []);
 
     const startResize = (event: any) => {
         event.preventDefault();
@@ -191,7 +204,9 @@ const Window: React.FC<WindowProps> = (props) => {
 
     return (
         <div onMouseDown={onWindowInteract} style={styles.container}>
-            <div
+            <section
+                aria-labelledby={titleId.current}
+                tabIndex={-1}
                 style={Object.assign({}, styles.window, {
                     width,
                     height,
@@ -234,6 +249,7 @@ const Window: React.FC<WindowProps> = (props) => {
                                     <div style={{ width: 16 }} />
                                 )}
                                 <p
+                                    id={titleId.current}
                                     style={
                                         windowActive
                                             ? {}
@@ -247,12 +263,18 @@ const Window: React.FC<WindowProps> = (props) => {
                             <div style={styles.windowTopButtons}>
                                 <Button
                                     icon="minimize"
+                                    label="Minimizar"
                                     onClick={props.minimizeWindow}
                                 />
-                                <Button icon="maximize" onClick={maximize} />
+                                <Button
+                                    icon="maximize"
+                                    label={isMaximized ? 'Restaurar' : 'Maximizar'}
+                                    onClick={maximize}
+                                />
                                 <div style={{ paddingLeft: 2 }}>
                                     <Button
                                         icon="close"
+                                        label="Cerrar"
                                         onClick={props.closeWindow}
                                     />
                                 </div>
@@ -322,7 +344,7 @@ const Window: React.FC<WindowProps> = (props) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <div
                 style={
@@ -372,6 +394,8 @@ const Window: React.FC<WindowProps> = (props) => {
 
 const styles: StyleSheetCSS = {
     window: {
+        // <section> does not get the global `div { display: flex }` rule.
+        display: 'flex',
         backgroundColor: Colors.lightGray,
         position: 'absolute',
     },

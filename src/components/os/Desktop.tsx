@@ -89,6 +89,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
             const app = APPLICATIONS[key];
             newShortcuts.push({
                 shortcutName: app.name,
+                appKey: app.key,
                 icon: app.shortcutIcon,
                 onOpen: () => {
                     addWindow(
@@ -126,6 +127,18 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 delete newWindows[key];
                 return newWindows;
             });
+            // Focus was inside the closed window: return it to the app's
+            // desktop shortcut instead of losing it to <body>.
+            setTimeout(() => {
+                const active = document.activeElement;
+                if (!active || active === document.body) {
+                    document
+                        .querySelector<HTMLElement>(
+                            `[data-desktop-shortcut="${key}"]`
+                        )
+                        ?.focus();
+                }
+            }, 0);
         }, 100);
     }, []);
 
@@ -224,7 +237,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                     </div>
                 );
             })}
-            <div style={styles.shortcuts}>
+            <nav aria-label="Escritorio" style={styles.shortcuts}>
                 {shortcuts.map((shortcut, i) => {
                     return (
                         <div
@@ -236,12 +249,13 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                             <DesktopShortcut
                                 icon={shortcut.icon}
                                 shortcutName={shortcut.shortcutName}
+                                appKey={shortcut.appKey}
                                 onOpen={shortcut.onOpen}
                             />
                         </div>
                     );
                 })}
-            </div>
+            </nav>
             <Toolbar
                 windows={windows}
                 toggleMinimize={toggleMinimize}
@@ -271,6 +285,7 @@ const styles: StyleSheetCSS = {
         position: 'absolute',
     },
     shortcuts: {
+        display: 'flex',
         position: 'absolute',
         top: 16,
         left: 6,
