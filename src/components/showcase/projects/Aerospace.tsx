@@ -13,7 +13,7 @@ export interface AerospaceProjectsProps {}
 
 const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
     return (
-        <main className="site-page-content">
+        <div className="site-page-content">
             <h1>Aeroespacial</h1>
             <p className="h3-style">CanSats y drones</p>
             <br />
@@ -86,7 +86,7 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
                 </p>
             </div>
             <ResumeDownload />
-        </main>
+        </div>
     );
 };
 

@@ -87,7 +87,7 @@ const Contact: React.FC<ContactProps> = (props) => {
     }, [formMessage]);
 
     return (
-        <main className="site-page-content">
+        <div className="site-page-content">
             <div style={styles.header}>
                 <h1>Contacto</h1>
                 <div style={styles.socials}>
@@ -269,7 +269,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                 </form>
             </div>
             <ResumeDownload altText="¿Necesitas una copia de mi hoja de vida?" />
-        </main>
+        </div>
     );
 };
 

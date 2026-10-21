@@ -12,7 +12,7 @@ export interface AboutProps {}
 const About: React.FC<AboutProps> = (props) => {
     return (
         // add on resize listener
-        <main className="site-page-content">
+        <div className="site-page-content">
             <h1 style={{ marginLeft: -16 }}>Bienvenido</h1>
             <h2 className="h3-style">Soy {profile.fullName}</h2>
             <br />
@@ -160,7 +160,7 @@ const About: React.FC<AboutProps> = (props) => {
                     <a href={`mailto:${profile.email}`}>{profile.email}</a>
                 </p>
             </div>
-        </main>
+        </div>
     );
 };
 

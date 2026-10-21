@@ -6,7 +6,7 @@ export interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
     return (
-        <main style={styles.page}>
+        <div style={styles.page}>
             <div style={styles.header}>
                 <h1 style={styles.name}>{profile.fullName}</h1>
                 <h2>{profile.role}</h2>
@@ -29,13 +29,13 @@ const Home: React.FC<HomeProps> = (props) => {
                     text="CONTACTO"
                 />
             </nav>
-        </main>
+        </div>
     );
 };
 
 const styles: StyleSheetCSS = {
     page: {
-        // <main> and <nav> do not get the global `div { display: flex }` rule.
+        // <nav> does not get the global `div { display: flex }` rule.
         display: 'flex',
         left: 0,
         right: 0,

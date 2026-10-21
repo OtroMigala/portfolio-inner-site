@@ -52,7 +52,7 @@ const ProjectBox: React.FC<ProjectBoxProps> = ({
 
 const Projects: React.FC<ProjectsProps> = (props) => {
     return (
-        <main className="site-page-content">
+        <div className="site-page-content">
             <h1>Proyectos</h1>
             <p className="h3-style">Software y aeroespacial</p>
             <br />
@@ -77,7 +77,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
                     route="aerospace"
                 />
             </div>
-        </main>
+        </div>
     );
 };
 

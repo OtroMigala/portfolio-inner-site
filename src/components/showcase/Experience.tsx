@@ -51,7 +51,7 @@ const ExperienceHeader: React.FC<ExperienceHeaderProps> = ({
 
 const Experience: React.FC<ExperienceProps> = (props) => {
     return (
-        <main className="site-page-content">
+        <div className="site-page-content">
             <h1 className="visually-hidden">Experiencia</h1>
             <ResumeDownload />
             <ExperienceHeader
@@ -222,7 +222,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                     </li>
                 </ul>
             </div>
-        </main>
+        </div>
     );
 };
 

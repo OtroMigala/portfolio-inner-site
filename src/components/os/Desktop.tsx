@@ -214,8 +214,9 @@ const Desktop: React.FC<DesktopProps> = (props) => {
         [getHighestZIndex]
     );
 
+    // The desktop is the main landmark; windows are labelled regions inside it.
     return !shutdown ? (
-        <div style={styles.desktop}>
+        <main style={styles.desktop}>
             {/* For each window in windows, loop over and render  */}
             {Object.keys(windows).map((key) => {
                 const element = windows[key].component;
@@ -261,7 +262,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 toggleMinimize={toggleMinimize}
                 shutdown={startShutdown}
             />
-        </div>
+        </main>
     ) : (
         <ShutdownSequence
             setShutdown={setShutdown}
@@ -272,6 +273,8 @@ const Desktop: React.FC<DesktopProps> = (props) => {
 
 const styles: StyleSheetCSS = {
     desktop: {
+        // <main> does not get the global `div { display: flex }` rule.
+        display: 'flex',
         minHeight: '100%',
         flex: 1,
         backgroundColor: Colors.turquoise,
