@@ -11,6 +11,7 @@ import DesktopShortcut, { DesktopShortcutProps } from './DesktopShortcut';
 import Scrabble from '../applications/Scrabble';
 import { IconName } from '../../assets/icons';
 import Credits from '../applications/Credits';
+import { useLocale } from '../../i18n';
 
 export interface DesktopProps {}
 
@@ -69,7 +70,16 @@ const APPLICATIONS: {
 };
 
 const Desktop: React.FC<DesktopProps> = (props) => {
+    const { t } = useLocale();
     const [windows, setWindows] = useState<DesktopWindows>({});
+
+    // Names are translated at render time, so switching language renames the
+    // desktop shortcuts and taskbar buttons of windows that are already open.
+    const appName = (key: string | undefined) =>
+        key === 'showcase' ? t('apps.showcase') : key === 'credits' ? t('apps.credits') : key ? APPLICATIONS[key].name : '';
+    const localizedWindows: DesktopWindows = Object.fromEntries(
+        Object.entries(windows).map(([key, w]) => [key, { ...w, name: appName(key) }])
+    );
 
     const [shortcuts, setShortcuts] = useState<DesktopShortcutProps[]>([]);
 
@@ -238,18 +248,18 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                     </div>
                 );
             })}
-            <nav aria-label="Escritorio" style={styles.shortcuts}>
+            <nav aria-label={t('os.desktop')} style={styles.shortcuts}>
                 {shortcuts.map((shortcut, i) => {
                     return (
                         <div
                             style={Object.assign({}, styles.shortcutContainer, {
                                 top: i * 104,
                             })}
-                            key={shortcut.shortcutName}
+                            key={shortcut.appKey}
                         >
                             <DesktopShortcut
                                 icon={shortcut.icon}
-                                shortcutName={shortcut.shortcutName}
+                                shortcutName={appName(shortcut.appKey)}
                                 appKey={shortcut.appKey}
                                 onOpen={shortcut.onOpen}
                             />
@@ -258,7 +268,7 @@ const Desktop: React.FC<DesktopProps> = (props) => {
                 })}
             </nav>
             <Toolbar
-                windows={windows}
+                windows={localizedWindows}
                 toggleMinimize={toggleMinimize}
                 shutdown={startShutdown}
             />

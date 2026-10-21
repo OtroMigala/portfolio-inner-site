@@ -8,11 +8,20 @@ const content = { es, en } as unknown as Record<Locale, PortfolioContent>;
 
 export const getContent = (locale: Locale): PortfolioContent => content[locale];
 
-// Every image and document under src/assets, bundled by webpack. Media in the
+// Images and documents under src/assets/pictures and /resume (the folders
+// content media can point to), bundled by webpack. Media in the
 // snapshot point here with `asset:<path>`; media from the CMS are full URLs.
-const localAssets = require.context('../assets', true, /\.(png|jpe?g|webp|gif|svg|pdf)$/);
+// The cast only adds types (no @types/webpack-env here); webpack still sees a
+// plain require.context call once TypeScript is stripped.
+interface AssetContext {
+    keys(): string[];
+    (id: string): string;
+}
+const localAssets = (require as unknown as {
+    context: (dir: string, recursive: boolean, filter: RegExp) => AssetContext;
+}).context('../assets', true, /^\.\/(pictures|resume)\/.*\.(png|jpe?g|webp|gif|svg|pdf)$/);
 const localAssetUrls: Record<string, string> = {};
-localAssets.keys().forEach((key) => {
+localAssets.keys().forEach((key: string) => {
     localAssetUrls[key.replace(/^\.\//, '')] = localAssets(key);
 });
 

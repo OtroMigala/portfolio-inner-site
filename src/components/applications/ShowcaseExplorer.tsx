@@ -11,11 +11,14 @@ import AerospaceProjects from '../showcase/projects/Aerospace';
 import VerticalNavbar from '../showcase/VerticalNavbar';
 import useInitialWindowSize from '../../hooks/useInitialWindowSize';
 import profile from '../../constants/profile';
+import { useLocale } from '../../i18n';
 
 export interface ShowcaseExplorerProps extends WindowAppProps {}
 
 const ShowcaseExplorer: React.FC<ShowcaseExplorerProps> = (props) => {
     const { initWidth, initHeight } = useInitialWindowSize({ margin: 100 });
+    const { t, content } = useLocale();
+    const fullName = content.profile.fullName;
 
     return (
         <Window
@@ -23,12 +26,12 @@ const ShowcaseExplorer: React.FC<ShowcaseExplorerProps> = (props) => {
             left={56}
             width={initWidth}
             height={initHeight}
-            windowTitle={`${profile.fullName} - Portafolio ${profile.year}`}
+            windowTitle={t('showcase.windowTitle', { name: fullName, year: profile.year })}
             windowBarIcon="windowExplorerIcon"
             closeWindow={props.onClose}
             onInteract={props.onInteract}
             minimizeWindow={props.onMinimize}
-            bottomLeftText={`© ${profile.year} ${profile.fullName}`}
+            bottomLeftText={`© ${profile.year} ${fullName}`}
         >
             <Router basename={process.env.PUBLIC_URL}>
                 <div className="site-page">

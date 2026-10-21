@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Colors from '../../constants/colors';
 import { Icon } from '../general';
+import { useLocale } from '../../i18n';
 // import { } from '../general';
 // import Home from '../site/Home';
 // import Window from './Window';
@@ -16,6 +17,8 @@ const Toolbar: React.FC<ToolbarProps> = ({
     toggleMinimize,
     shutdown,
 }) => {
+    const { t, locale, setLocale } = useLocale();
+    const shutdownLabel = t('os.shutdown');
     const getTime = () => {
         const date = new Date();
         let hours = date.getHours();
@@ -94,7 +97,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
     };
 
     return (
-        <nav aria-label="Barra de tareas" style={styles.toolbarOuter}>
+        <nav aria-label={t('os.taskbar')} style={styles.toolbarOuter}>
             <div ref={startAreaRef} onKeyDown={onStartAreaKeyDown}>
                 {startWindowOpen && (
                     <div id="start-menu" style={styles.startWindow}>
@@ -120,7 +123,8 @@ const Toolbar: React.FC<ToolbarProps> = ({
                                         icon="computerBig"
                                     />
                                     <span style={styles.startMenuText}>
-                                        <u>A</u>pagar...
+                                        <u>{shutdownLabel[0]}</u>
+                                        {shutdownLabel.slice(1)}
                                     </span>
                                 </button>
                             </div>
@@ -156,7 +160,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
                                 icon="windowsStartIcon"
                                 style={styles.startIcon}
                             />
-                            <span className="toolbar-text ">Inicio</span>
+                            <span className="toolbar-text ">{t('os.start')}</span>
                         </span>
                     </button>
                     <div style={styles.toolbarTabsContainer}>
@@ -196,6 +200,18 @@ const Toolbar: React.FC<ToolbarProps> = ({
                         })}
                     </div>
                 </div>
+                {/* Language toggle, labelled with the language it switches to. */}
+                <button
+                    type="button"
+                    className="toolbar-text"
+                    style={styles.langButton}
+                    lang={t('os.langToggleCode')}
+                    aria-label={t('os.langToggleLabel')}
+                    title={t('os.langToggleLabel')}
+                    onClick={() => setLocale(locale === 'es' ? 'en' : 'es')}
+                >
+                    {t('os.langToggle')}
+                </button>
                 <div style={styles.time}>
                     <Icon style={styles.volumeIcon} icon="volumeOn" />
                     <p style={styles.timeText}>{time}</p>
@@ -379,6 +395,17 @@ const styles: StyleSheetCSS = {
     toolbar: {
         flexGrow: 1,
         width: '100%',
+    },
+    langButton: {
+        height: 24,
+        marginRight: 4,
+        padding: '0 6px',
+        background: Colors.lightGray,
+        border: `1px solid ${Colors.black}`,
+        borderTopColor: Colors.white,
+        borderLeftColor: Colors.white,
+        fontSize: 14,
+        cursor: 'pointer',
     },
     time: {
         flexShrink: 1,

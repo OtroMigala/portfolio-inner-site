@@ -3,37 +3,38 @@ import Window from '../os/Window';
 import { useInterval } from 'usehooks-ts';
 import { motion, useReducedMotion } from 'framer-motion';
 import profile from '../../constants/profile';
+import { useLocale } from '../../i18n';
 
 export interface CreditsProps extends WindowAppProps {}
 
 // The original project is MIT-licensed; keep Henry Heffernan's credits.
-const CREDITS = [
+const buildCredits = (t: ReturnType<typeof useLocale>['t'], fullName: string) => [
     {
-        title: 'Adaptación y contenido',
-        rows: [[profile.fullName, 'Todo lo personal']],
+        title: t('credits.adaptation'),
+        rows: [[fullName, t('credits.adaptation.role')]],
     },
     {
-        title: 'Diseño e ingeniería original',
-        rows: [['Henry Heffernan', 'Todo (licencia MIT)']],
+        title: t('credits.original'),
+        rows: [['Henry Heffernan', t('credits.original.role')]],
     },
     {
-        title: 'Modelado y texturas',
+        title: t('credits.modeling'),
         rows: [
-            ['Henry Heffernan', 'Texturas, composición y UV'],
-            ['Mickael Boitte', 'Modelo del computador'],
-            ['Sean Nicolas', 'Modelos del entorno'],
+            ['Henry Heffernan', t('credits.modeling.textures')],
+            ['Mickael Boitte', t('credits.modeling.computer')],
+            ['Sean Nicolas', t('credits.modeling.environment')],
         ],
     },
     {
-        title: 'Diseño de sonido',
+        title: t('credits.sound'),
         rows: [
-            ['Henry Heffernan', 'Mezcla, composición y foley'],
-            ['Sound Cassette', 'Ambiente de oficina'],
+            ['Henry Heffernan', t('credits.sound.mix')],
+            ['Sound Cassette', t('credits.sound.office')],
             ['Windows 95 Startup Sound', 'Microsoft'],
         ],
     },
     {
-        title: 'Inspiración',
+        title: t('credits.inspiration'),
         rows: [
             ['Henry Heffernan', 'Bruno Simon'],
             ['Jesse Zhou', 'Pink Yellow'],
@@ -42,6 +43,9 @@ const CREDITS = [
 ];
 
 const Credits: React.FC<CreditsProps> = (props) => {
+    const { t, content } = useLocale();
+    const fullName = content.profile.fullName;
+    const CREDITS = buildCredits(t, fullName);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [time, setTime] = useState(0);
     // Reduced motion: no auto-advancing slides; the visitor moves on manually.
@@ -76,19 +80,19 @@ const Credits: React.FC<CreditsProps> = (props) => {
             left={48}
             width={1100}
             height={800}
-            windowTitle="Créditos"
+            windowTitle={t('credits.title')}
             windowBarIcon="windowExplorerIcon"
             closeWindow={props.onClose}
             onInteract={props.onInteract}
             minimizeWindow={props.onMinimize}
-            bottomLeftText={`© ${profile.year} ${profile.fullName}`}
+            bottomLeftText={`© ${profile.year} ${fullName}`}
         >
             <div
                 onMouseDown={nextSlide}
                 className="site-page"
                 style={styles.credits}
             >
-                <h2>Créditos</h2>
+                <h2>{t('credits.title')}</h2>
                 <p>
                     {profile.osName}, {profile.year}
                 </p>
@@ -126,7 +130,7 @@ const Credits: React.FC<CreditsProps> = (props) => {
                         if (e.detail === 0) nextSlide();
                     }}
                 >
-                    Haz clic para continuar...
+                    {t('credits.continue')}
                 </button>
                 <br />
                 <div style={styles.nextSlideTimer}>

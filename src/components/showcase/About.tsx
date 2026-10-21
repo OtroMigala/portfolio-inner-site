@@ -1,164 +1,112 @@
 import React from 'react';
-import meBaby from '../../assets/pictures/alejo-bebe.jpg';
-import meTrondheim from '../../assets/pictures/alejo-trondheim.jpg';
-import meNow from '../../assets/pictures/alejo-retrato.jpg';
-import isifLogo from '../../assets/pictures/logos/isif.png';
-import { Link } from 'react-router-dom';
 import ResumeDownload from './ResumeDownload';
-import profile from '../../constants/profile';
+import { useLocale } from '../../i18n';
+import Inline from '../../content/Inline';
+import ContentImage from '../../content/ContentImage';
+import type { AboutSection, Media } from '../../content/types';
 
 export interface AboutProps {}
 
-const About: React.FC<AboutProps> = (props) => {
+const Paragraphs: React.FC<{ items: string[] }> = ({ items }) => (
+    <>
+        {items.map((text, i) => (
+            <React.Fragment key={i}>
+                {i > 0 && <br />}
+                <p>
+                    <Inline text={text} />
+                </p>
+            </React.Fragment>
+        ))}
+    </>
+);
+
+const CaptionedImage: React.FC<{ media: Media }> = ({ media }) => (
+    <figure className="captioned-image" style={styles.figure}>
+        <ContentImage media={media} style={styles.image} width={900} />
+        {media.caption && (
+            <figcaption>
+                <p>
+                    <sub>{media.caption}</sub>
+                </p>
+            </figcaption>
+        )}
+    </figure>
+);
+
+// One block of the about page: heading, optional logo, paragraphs, and an
+// image placed after `imageAfter` paragraphs (at the end by default).
+const Section: React.FC<{ section: AboutSection }> = ({ section }) => {
+    const split = section.imageAfter ?? section.body.length;
     return (
-        // add on resize listener
+        <>
+            <h2 className="h3-style">{section.heading}</h2>
+            <br />
+            {section.logo && <ContentImage media={section.logo} style={styles.logo} />}
+            <Paragraphs items={section.body.slice(0, split)} />
+            {section.image && (
+                <>
+                    <br />
+                    <CaptionedImage media={section.image} />
+                </>
+            )}
+            <Paragraphs items={section.body.slice(split)} />
+            <br />
+            <br />
+        </>
+    );
+};
+
+const About: React.FC<AboutProps> = (props) => {
+    const { t, content } = useLocale();
+    const p = content.profile;
+    return (
         <div className="site-page-content">
-            <h1 style={{ marginLeft: -16 }}>Bienvenido</h1>
-            <h2 className="h3-style">Soy {profile.fullName}</h2>
+            <h1 style={{ marginLeft: -16 }}>{t('about.welcome')}</h1>
+            <h2 className="h3-style">{t('about.iam', { name: p.fullName })}</h2>
             <br />
             <div className="text-block">
-                <p>
-                    Estudio Ingeniería de Sistemas en la Universidad del Cauca,
-                    en {profile.location}, y trabajo como desarrollador full
-                    stack. Actualmente estoy en EzLife construyendo sistemas de
-                    información gubernamentales con microservicios en NestJS,
-                    Next.js y React.
-                </p>
-                <br />
-                <p>
-                    Gracias por tomarte el tiempo de explorar mi portafolio.
-                    Espero que lo disfrutes tanto como yo disfruté armándolo. Si
-                    tienes preguntas, propuestas o simplemente quieres saludar,
-                    escríbeme desde <Link to="/contact">este formulario</Link> o
-                    al correo{' '}
-                    <a href={`mailto:${profile.email}`}>{profile.email}</a>
-                </p>
+                <Paragraphs items={p.summary} />
             </div>
             <ResumeDownload />
             <div className="text-block">
-                <h2 className="h3-style">Sobre mí</h2>
-                <br />
-                <p>
-                    Mi lema es simple: {profile.tagline.toLowerCase()}. Me
-                    muevo entre dos mundos que se cruzan más de lo que parece:
-                    el desarrollo de software full stack y los sistemas
-                    embebidos y aeroespaciales. En uno trabajo con Node.js,
-                    NestJS, PostgreSQL/PostGIS, Next.js y React; en el otro, con
-                    C sobre microcontroladores STM32, telemetría y filtros de
-                    Kalman.
-                </p>
-                <br />
-                <div className="captioned-image">
-                    <img src={meBaby} style={styles.image} alt="Alejo de bebé, de pie en un corral, estirando la mano hacia la cámara" />
-                    <p>
-                        <sub>
-                            Yo intentando borrar el kernel sin permiso
-                        </sub>
-                    </p>
-                </div>
-
-                <p>
-                    Empecé Ingeniería de Sistemas en la Universidad del Cauca en
-                    2021. Desde entonces he trabajado en la migración de
-                    sistemas monolíticos a microservicios, en seguridad y
-                    control de acceso (RBAC), en pruebas automatizadas con Jest
-                    y Playwright, y en el desarrollo de páginas web como
-                    freelance. Puedes ver el detalle en mi página de{' '}
-                    <Link to="/experience">experiencia</Link>.
-                </p>
-                <br />
-                <p>
-                    Desde febrero de 2025 soy vicepresidente del capítulo
-                    estudiantil IEEE AESS Unicauca. Ahí he dirigido los equipos
-                    del capítulo en el concurso mundial CanSat de la UNAM y en
-                    ENMICE, y la organización del hackathon NASA Space Apps
-                    Challenge. Esos proyectos están en mi página de{' '}
-                    <Link to="/projects/aerospace">proyectos aeroespaciales</Link>
-                    .
-                </p>
-                <br />
-                <br />
-                <h2 className="h3-style">Fusión de información</h2>
-                <br />
-                <img src={isifLogo} style={styles.logo} alt="ISIF" />
-                <p>
-                    Mi interés investigativo es la fusión de información
-                    (information fusion) aplicada a navegación, drones/UAVs y
-                    estimación de estados. La International Society of
-                    Information Fusion (ISIF) me otorgó la beca FUSION dos
-                    veces: en 2025 para el bootcamp en Río de Janeiro, Brasil, y
-                    en 2026 para el bootcamp en la Norwegian University of
-                    Science and Technology (NTNU), en Trondheim, Noruega.
-                </p>
-                <br />
-                <div className="captioned-image">
-                    <img src={meTrondheim} style={styles.image} alt="Alejo sobre el puente Gamle Bybro de Trondheim, con las casas de madera de colores junto al río al fondo" />
-                    <p>
-                        <sub>
-                            Yo, Trondheim
-                        </sub>
-                    </p>
-                </div>
+                {content.about.map((section) => (
+                    <Section key={section.id} section={section} />
+                ))}
                 <div style={{}}>
-                    <div
-                        style={{
-                            flex: 1,
-                            textAlign: 'justify',
-                            alignSelf: 'center',
-                            flexDirection: 'column',
-                        }}
-                    >
-                        <h2 className="h3-style">Reconocimientos</h2>
+                    <div style={styles.facts}>
+                        <h2 className="h3-style">{t('about.awards')}</h2>
                         <br />
                         <ul>
-                            <li>
-                                <p>
-                                    Beca ISIF FUSION en 2025 (Río de Janeiro,
-                                    Brasil) y 2026 (Trondheim, Noruega).
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    8.º lugar en el Curso-Concurso Mundial
-                                    CanSat 2025 (UNAM) con el equipo TULCAN-SAT.
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    1.er lugar en la categoría Picosatélite –
-                                    Carga Útil de ENMICE 2025 (Jalisco, México)
-                                    con el equipo AIR-SAT.
-                                </p>
-                            </li>
+                            {content.awards.map((award) => (
+                                <li key={award.id}>
+                                    <p>
+                                        <Inline text={award.text} />
+                                    </p>
+                                </li>
+                            ))}
                         </ul>
                         <br />
-                        <h2 className="h3-style">Idiomas</h2>
+                        <h2 className="h3-style">{t('about.languages')}</h2>
                         <br />
-                        <p>Español nativo e inglés B1.</p>
+                        <ul>
+                            {content.languages.map((l) => (
+                                <li key={l.language}>
+                                    <p>
+                                        {l.language}: {l.level}
+                                    </p>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
-                    <div style={styles.verticalImage}>
-                        <img src={meNow} style={styles.image} alt="Alejo sonriendo en una colina con vista a Trondheim y su catedral al fondo" />
-                        <p>
-                            <sub>
-                                Yo, Trondheim otra vez
-                            </sub>
-                        </p>
-                    </div>
+                    {p.portrait && (
+                        <div style={styles.verticalImage}>
+                            <CaptionedImage media={p.portrait} />
+                        </div>
+                    )}
                 </div>
                 <br />
                 <br />
-                <p>
-                    ¡Gracias por leer sobre mí! Espero que disfrutes explorando
-                    el resto de {profile.osName} y todo lo que tiene para
-                    ofrecer. Y sí, los juegos del escritorio funcionan.
-                </p>
-                <br />
-                <p>
-                    Si tienes preguntas o comentarios, me encantaría leerlos.
-                    Puedes escribirme desde la{' '}
-                    <Link to="/contact">página de contacto</Link> o al correo{' '}
-                    <a href={`mailto:${profile.email}`}>{profile.email}</a>
-                </p>
+                <Paragraphs items={p.closing} />
             </div>
         </div>
     );
@@ -168,6 +116,15 @@ const styles: StyleSheetCSS = {
     image: {
         height: 'auto',
         width: '100%',
+    },
+    figure: {
+        margin: 0,
+    },
+    facts: {
+        flex: 1,
+        textAlign: 'justify',
+        alignSelf: 'center',
+        flexDirection: 'column',
     },
     logo: {
         height: 48,

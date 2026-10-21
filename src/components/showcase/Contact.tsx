@@ -3,7 +3,8 @@ import colors from '../../constants/colors';
 import ghIcon from '../../assets/pictures/contact-gh.png';
 import inIcon from '../../assets/pictures/contact-in.png';
 import ResumeDownload from './ResumeDownload';
-import profile from '../../constants/profile';
+import { useLocale } from '../../i18n';
+import Inline from '../../content/Inline';
 
 export interface ContactProps {}
 
@@ -26,12 +27,13 @@ interface SocialBoxProps {
 
 // Icon-only link: the accessible name comes from `label`.
 const SocialBox: React.FC<SocialBoxProps> = ({ link, icon, label }) => {
+    const { t } = useLocale();
     return (
         <a
             rel="noreferrer"
             target="_blank"
             href={link}
-            aria-label={`${label} (se abre en una pestaña nueva)`}
+            aria-label={`${label} ${t('newTab')}`}
         >
             <div className="big-button-container" style={styles.social}>
                 <img src={icon} alt="" style={styles.socialImage} />
@@ -40,7 +42,12 @@ const SocialBox: React.FC<SocialBoxProps> = ({ link, icon, label }) => {
     );
 };
 
+const SOCIAL_ICONS: Record<string, string> = { github: ghIcon, linkedin: inIcon };
+
 const Contact: React.FC<ContactProps> = (props) => {
+    const { t, content } = useLocale();
+    const contact = content.contact;
+    const instagram = contact.links.find((l) => l.kind === 'instagram');
     const [company, setCompany] = useState('');
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
@@ -62,18 +69,18 @@ const Contact: React.FC<ContactProps> = (props) => {
     function submitForm() {
         if (!isFormValid) {
             setShowErrors(true);
-            setFormMessage('Revisa los campos marcados e inténtalo de nuevo.');
+            setFormMessage(t('contact.invalid'));
             setFormMessageColor(ERROR_RED);
             return;
         }
-        const subject = `Contacto desde el portafolio: ${name}${
-            company ? ` (${company})` : ''
-        }`;
+        const subject = t('contact.subject', {
+            name: company ? `${name} (${company})` : name,
+        });
         const body = `${message}\n\n${name}\n${email}`;
-        window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(
+        window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(
             subject
         )}&body=${encodeURIComponent(body)}`;
-        setFormMessage(`¡Gracias ${name}! Se abrirá tu cliente de correo.`);
+        setFormMessage(t('contact.thanks', { name }));
         setFormMessageColor(colors.blue);
     }
 
@@ -89,52 +96,42 @@ const Contact: React.FC<ContactProps> = (props) => {
     return (
         <div className="site-page-content">
             <div style={styles.header}>
-                <h1>Contacto</h1>
+                <h1>{t('contact.title')}</h1>
                 <div style={styles.socials}>
-                    <SocialBox
-                        icon={ghIcon}
-                        link={profile.github}
-                        label="GitHub"
-                    />
-                    {profile.linkedin && (
-                        <SocialBox
-                            icon={inIcon}
-                            link={profile.linkedin}
-                            label="LinkedIn"
-                        />
-                    )}
+                    {contact.links
+                        .filter((l) => SOCIAL_ICONS[l.kind])
+                        .map((l) => (
+                            <SocialBox
+                                key={l.url}
+                                icon={SOCIAL_ICONS[l.kind]}
+                                link={l.url}
+                                label={l.label}
+                            />
+                        ))}
                 </div>
             </div>
             <div className="text-block">
                 <p>
-                    Estoy disponible para proyectos freelance. Si tienes una
-                    oportunidad o una idea, escríbeme, ¡me encantaría conversar!
-                    Puedes contactarme por correo, por WhatsApp o con el
-                    formulario de abajo.
+                    <Inline text={contact.intro} /> {t('contact.how')}
                 </p>
                 <br />
                 <p>
-                    <b>Correo: </b>
-                    <a href={`mailto:${profile.email}`}>{profile.email}</a>
+                    <b>{t('contact.email')} </b>
+                    <a href={`mailto:${contact.email}`}>{contact.email}</a>
                 </p>
                 <p>
-                    <b>WhatsApp: </b>
-                    <a rel="noreferrer" target="_blank" href={profile.whatsapp}>
-                        {profile.phoneDisplay}
+                    <b>{t('contact.whatsapp')} </b>
+                    <a rel="noreferrer" target="_blank" href={contact.whatsappUrl}>
+                        {contact.phoneDisplay}
+                        <span className="visually-hidden"> {t('newTab')}</span>
                     </a>
                 </p>
-                {profile.instagram && (
+                {instagram && (
                     <p>
-                        <b>Instagram: </b>
-                        <a
-                            rel="noreferrer"
-                            target="_blank"
-                            href={profile.instagram}
-                        >
-                            {profile.instagram
-                                .replace(/\/$/, '')
-                                .split('/')
-                                .pop()}
+                        <b>{t('contact.instagram')} </b>
+                        <a rel="noreferrer" target="_blank" href={instagram.url}>
+                            {instagram.url.replace(/\/$/, '').split('/').pop()}
+                            <span className="visually-hidden"> {t('newTab')}</span>
                         </a>
                     </p>
                 )}
@@ -154,7 +151,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                                     *
                                 </span>
                             )}
-                            <b>Tu nombre:</b>
+                            <b>{t('contact.name')}</b>
                         </p>
                     </label>
                     <input
@@ -165,7 +162,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                         autoComplete="name"
                         required
                         aria-invalid={showErrors && !name}
-                        placeholder="Nombre"
+                        placeholder={t('contact.namePlaceholder')}
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
@@ -176,7 +173,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                                     *
                                 </span>
                             )}
-                            <b>Correo:</b>
+                            <b>{t('contact.emailLabel')}</b>
                         </p>
                     </label>
                     <input
@@ -187,13 +184,13 @@ const Contact: React.FC<ContactProps> = (props) => {
                         autoComplete="email"
                         required
                         aria-invalid={showErrors && !validateEmail(email)}
-                        placeholder="Correo"
+                        placeholder={t('contact.emailPlaceholder')}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <label htmlFor="contact-company">
                         <p>
-                            <b>Empresa (opcional):</b>
+                            <b>{t('contact.company')}</b>
                         </p>
                     </label>
                     <input
@@ -202,7 +199,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                         type="text"
                         name="company"
                         autoComplete="organization"
-                        placeholder="Empresa"
+                        placeholder={t('contact.companyPlaceholder')}
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
                     />
@@ -213,7 +210,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                                     *
                                 </span>
                             )}
-                            <b>Mensaje:</b>
+                            <b>{t('contact.message')}</b>
                         </p>
                     </label>
                     <textarea
@@ -221,7 +218,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                         name="message"
                         required
                         aria-invalid={showErrors && !message}
-                        placeholder="Mensaje"
+                        placeholder={t('contact.messagePlaceholder')}
                         style={styles.formItem}
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
@@ -234,7 +231,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                             style={styles.button}
                             type="submit"
                         >
-                            Enviar mensaje
+                            {t('contact.send')}
                         </button>
                         <div style={styles.formInfo}>
                             <p
@@ -248,7 +245,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                                     <sub>
                                         {formMessage
                                             ? `${formMessage}`
-                                            : ' El mensaje se abre en tu correo, dirigido a mí'}
+                                            : ` ${t('contact.hint')}`}
                                     </sub>
                                 </b>
                             </p>
@@ -256,8 +253,8 @@ const Contact: React.FC<ContactProps> = (props) => {
                                 <sub>
                                     {!isFormValid ? (
                                         <span>
-                                            <b style={styles.star}>*</b> =
-                                            obligatorio
+                                            <b style={styles.star}>*</b> ={' '}
+                                            {t('contact.required')}
                                         </span>
                                     ) : (
                                         '\xa0'
@@ -268,7 +265,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                     </div>
                 </form>
             </div>
-            <ResumeDownload altText="¿Necesitas una copia de mi hoja de vida?" />
+            <ResumeDownload altText={t('contact.resumeQuestion')} />
         </div>
     );
 };

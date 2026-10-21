@@ -1,81 +1,56 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import software from '../../assets/pictures/projects/software.gif';
-import satellite from '../../assets/pictures/projects/satellite.svg';
+import { useLocale } from '../../i18n';
+import ContentImage from '../../content/ContentImage';
+import type { ProjectCategory } from '../../content/types';
 
 export interface ProjectsProps {}
 
-interface ProjectBoxProps {
-    icon: string;
-    title: string;
-    subtitle: string;
-    route: string;
-    iconStyle: React.CSSProperties;
-}
-
-const ProjectBox: React.FC<ProjectBoxProps> = ({
-    icon,
-    title,
-    subtitle,
-    route,
-    iconStyle,
-}) => {
-    // A real link: reachable with Tab, opens with Enter, works with
-    // "open in new tab" and is announced as a link.
-    return (
-        <Link
-            to={`/projects/${route}`}
-            className="big-button-container"
-            style={styles.projectLink}
-        >
-            <div style={styles.projectLinkLeft}>
-                <img
-                    src={icon}
+// A real link: reachable with Tab, opens with Enter, works with
+// "open in new tab" and is announced as a link.
+const ProjectBox: React.FC<{ category: ProjectCategory }> = ({ category }) => (
+    <Link
+        to={`/projects/${category.id}`}
+        className="big-button-container"
+        style={styles.projectLink}
+    >
+        <div style={styles.projectLinkLeft}>
+            {category.icon && (
+                <ContentImage
+                    media={category.icon}
                     style={Object.assign(
                         {},
                         styles.projectLinkImage,
-                        iconStyle
+                        category.id === 'aerospace' ? styles.satelliteIcon : styles.computerIcon
                     )}
-                    alt=""
                 />
-                <div style={styles.projectText}>
-                    <span className="h1-style" style={{ fontSize: 48 }}>
-                        {title}
-                    </span>
-                    <span className="h3-style">{subtitle}</span>
-                </div>
+            )}
+            <div style={styles.projectText}>
+                <span className="h1-style" style={{ fontSize: 48 }}>
+                    {category.title}
+                </span>
+                <span className="h3-style" style={{ textTransform: 'uppercase' }}>
+                    {category.subtitle}
+                </span>
             </div>
-            <div style={styles.projectLinkRight}></div>
-        </Link>
-    );
-};
+        </div>
+        <div style={styles.projectLinkRight}></div>
+    </Link>
+);
 
 const Projects: React.FC<ProjectsProps> = (props) => {
+    const { t, content } = useLocale();
     return (
         <div className="site-page-content">
-            <h1>Proyectos</h1>
-            <p className="h3-style">Software y aeroespacial</p>
+            <h1>{t('projects.title')}</h1>
+            <p className="h3-style">{t('projects.subtitle')}</p>
             <br />
-            <p>
-                Haz clic en una de las áreas para ver algunos de los proyectos
-                en los que he trabajado en ese campo.
-            </p>
+            <p>{t('projects.intro')}</p>
             <br />
             <div style={styles.projectLinksContainer}>
-                <ProjectBox
-                    icon={software}
-                    iconStyle={styles.computerIcon}
-                    title="Software"
-                    subtitle="PROYECTOS"
-                    route="software"
-                />
-                <ProjectBox
-                    icon={satellite}
-                    iconStyle={styles.satelliteIcon}
-                    title="Aeroespacial"
-                    subtitle="CANSATS Y DRONES"
-                    route="aerospace"
-                />
+                {content.projectCategories.map((category) => (
+                    <ProjectBox key={category.id} category={category} />
+                ))}
             </div>
         </div>
     );

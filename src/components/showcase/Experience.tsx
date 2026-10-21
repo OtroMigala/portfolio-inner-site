@@ -1,47 +1,32 @@
 import React from 'react';
 import ResumeDownload from './ResumeDownload';
-import aessLogo from '../../assets/pictures/logos/aess.svg';
-import ezlifeLogo from '../../assets/pictures/logos/EzlifeLogo.png';
-import cimdolLogo from '../../assets/pictures/logos/logocimdol-CBjlnQpX.webp';
-import ticanor1 from '../../assets/pictures/projects/Ticanor1.jpeg';
-import ticanor2 from '../../assets/pictures/projects/Ticanor2.jpeg';
-import juntaAESS from '../../assets/pictures/projects/juntaAESS.jpeg';
+import { useLocale } from '../../i18n';
+import Inline from '../../content/Inline';
+import ContentImage from '../../content/ContentImage';
+import { dateRange } from '../../content/format';
+import type { Experience as ExperienceEntry } from '../../content/types';
 
 export interface ExperienceProps {}
 
-interface ExperienceHeaderProps {
-    company: string;
-    role: string;
-    dates: string;
-    url?: string;
-    urlText?: string;
-    logo?: string;
-}
-
-const ExperienceHeader: React.FC<ExperienceHeaderProps> = ({
-    company,
-    role,
-    dates,
-    url,
-    urlText,
-    logo,
-}) => {
+const ExperienceHeader: React.FC<{ entry: ExperienceEntry }> = ({ entry }) => {
+    const { t, months } = useLocale();
     return (
         <div style={styles.headerContainer}>
             <div style={styles.header}>
-                {logo && <img src={logo} style={styles.logo} alt="" />}
+                {entry.logo && <ContentImage media={entry.logo} style={styles.logo} />}
                 <div style={styles.headerRow}>
-                    <h2 className="h1-style">{company}</h2>
-                    {url && (
-                        <a rel="noreferrer" target="_blank" href={url}>
-                            <span className="h4-style">{urlText || url}</span>
+                    <h2 className="h1-style">{entry.organization}</h2>
+                    {entry.website && (
+                        <a rel="noreferrer" target="_blank" href={entry.website.url}>
+                            <span className="h4-style">{entry.website.label}</span>
+                            <span className="visually-hidden"> {t('newTab')}</span>
                         </a>
                     )}
                 </div>
                 <div style={styles.headerRow}>
-                    <p className="h3-style">{role}</p>
+                    <p className="h3-style">{entry.role}</p>
                     <p>
-                        <b>{dates}</b>
+                        <b>{dateRange(entry, months, t('date.present'))}</b>
                     </p>
                 </div>
             </div>
@@ -50,178 +35,38 @@ const ExperienceHeader: React.FC<ExperienceHeaderProps> = ({
 };
 
 const Experience: React.FC<ExperienceProps> = (props) => {
+    const { t, content } = useLocale();
     return (
         <div className="site-page-content">
-            <h1 className="visually-hidden">Experiencia</h1>
+            <h1 className="visually-hidden">{t('experience.title')}</h1>
             <ResumeDownload />
-            <ExperienceHeader
-                company="EzLife"
-                role="Analista de Desarrollo de Software"
-                dates="2026 - Presente"
-                url="https://www.ezlife.com.co/"
-                urlText="www.ezlife.com.co"
-                logo={ezlifeLogo}
-            />
-            <div className="text-block">
-                <p>
-                    Desarrollo e implementación de sistemas de información
-                    gubernamentales, con flujos de trabajo por estados y roles.
-                    Trabajo con NestJS, gRPC, Next.js, React 19 y Docker.
-                </p>
-                <br />
-                <ul>
-                    <li>
-                        <p>
-                            Migración de sistemas monolíticos a arquitecturas de
-                            microservicios con NestJS, comunicados mediante gRPC
-                            y HTTP detrás de un API Gateway.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Modernización de interfaces web legadas hacia
-                            Next.js y React 19, conservando la identidad visual
-                            y conectándolas a los nuevos servicios.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Implementación de flujos por estados y roles, gestión
-                            de plazos legales en días hábiles, numeración oficial
-                            y trazabilidad de actos administrativos.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Módulos de gestión masiva de datos oficiales: cargas
-                            masivas, inventarios por territorio y asignación
-                            automática y manual.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Detección y corrección de vulnerabilidades y fallas
-                            de integridad: suplantación de identidad, operaciones
-                            sin transacción, pérdida silenciosa de datos entre
-                            servicios y carga de archivos.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Aseguramiento de calidad con más de 300 pruebas
-                            unitarias en Jest y pruebas end-to-end con Playwright
-                            sobre entornos completos en Docker.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Integración de líneas de desarrollo paralelas y
-                            documentación técnica: reportes de pruebas,
-                            decisiones de negocio y guías de despliegue con
-                            migraciones de datos.
-                        </p>
-                    </li>
-                </ul>
-            </div>
-            <ExperienceHeader
-                company="CIMDOL SAS"
-                role="Ingeniero de Sistemas"
-                dates="2025 - Presente"
-                logo={cimdolLogo}
-            />
-            <div className="text-block">
-                <ul>
-                    <li>
-                        <p>
-                            Desarrollo de software y de la página web de la
-                            organización.
-                        </p>
-                    </li>
-                    <li>
-                        <p>Apoyo en mantenimiento de hardware de oficina.</p>
-                    </li>
-                </ul>
-            </div>
-            <ExperienceHeader
-                company="DSTEI Ticanor"
-                role="Ingeniero de Sistemas"
-                dates="2024 - Presente"
-            />
-            <div className="text-block">
-                <p>
-                    Proyecto financiado por la iniciativa DSTEI de IEEE para
-                    construir un dron de monitoreo agrícola.
-                </p>
-                <br />
-                <ul>
-                    <li>
-                        <p>
-                            Diseño de algoritmos de fusión sensorial (LiDAR,
-                            infrarrojo, acelerómetro y GPS) para el subsistema de
-                            navegación del dron.
-                        </p>
-                    </li>
-                </ul>
-                <img src={ticanor1} style={styles.image} alt="Equipo Ticanor en una sala de reuniones con varios drones sobre la mesa y la propuesta de la fase 3 proyectada al fondo" />
-                <img src={ticanor2} style={styles.image} alt="Integrantes del equipo Ticanor sostienen drones junto a un portátil, frente a la presentación del proyecto" />
-            </div>
-            <ExperienceHeader
-                company="IEEE AESS Unicauca"
-                role="Vicepresidente"
-                dates="Feb 2025 - Presente"
-                logo={aessLogo}
-            />
-            <div className="text-block">
-                <p>
-                    Capítulo estudiantil de la IEEE Aerospace and Electronic
-                    Systems Society en la Universidad del Cauca.
-                </p>
-                <br />
-                <ul>
-                    <li>
-                        <p>
-                            Lideré la gestión y consecución de 6.200 USD para el
-                            proyecto "Voices of Water and Earth" (EPICS in
-                            IEEE): nodos de comunicación con sensado y fusión de
-                            datos para comunidades indígenas Misak del Cauca.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Dirigí los equipos de competencia del capítulo en el
-                            concurso mundial CanSat de la UNAM, ediciones 2024 y
-                            2025.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Dirigí la organización del hackathon NASA Space Apps
-                            Challenge, ediciones 2024 y 2025.
-                        </p>
-                    </li>
-                </ul>
-                <img src={juntaAESS} style={styles.image} alt="Integrantes del capítulo IEEE AESS Unicauca con camisetas del capítulo, sosteniendo una bandera de AESS Unicauca" />
-            </div>
-            <ExperienceHeader
-                company="Freelance"
-                role="Desarrollador Web"
-                dates="Independiente"
-            />
-            <div className="text-block">
-                <ul>
-                    <li style={styles.row}>
-                        <p>• Página web de Sonido Cárdenas</p>
-                        <p>[ Empresa ]</p>
-                    </li>
-                    <li style={styles.row}>
-                        <p>
-                            • Página web del Semillero de Ingeniería
-                            Aeroespacial SIA
-                        </p>
-                        <p>[ Unicauca ]</p>
-                    </li>
-                </ul>
-            </div>
+            {content.experience.map((entry) => (
+                <React.Fragment key={entry.id}>
+                    <ExperienceHeader entry={entry} />
+                    <div className="text-block">
+                        {entry.summary && (
+                            <p>
+                                <Inline text={entry.summary} />
+                            </p>
+                        )}
+                        {entry.summary && entry.highlights.length > 0 && <br />}
+                        {entry.highlights.length > 0 && (
+                            <ul>
+                                {entry.highlights.map((item, i) => (
+                                    <li key={i}>
+                                        <p>
+                                            <Inline text={item} />
+                                        </p>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                        {entry.images.map((media) => (
+                            <ContentImage key={media.url} media={media} style={styles.image} width={900} />
+                        ))}
+                    </div>
+                </React.Fragment>
+            ))}
         </div>
     );
 };

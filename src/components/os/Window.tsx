@@ -6,6 +6,7 @@ import Icon from '../general/Icon';
 import Button from './Button';
 import DragIndicator from './DragIndicator';
 import ResizeIndicator from './ResizeIndicator';
+import { useLocale } from '../../i18n';
 
 export interface WindowProps {
     closeWindow: () => void;
@@ -27,6 +28,7 @@ export interface WindowProps {
 let windowCount = 0;
 
 const Window: React.FC<WindowProps> = (props) => {
+    const { t } = useLocale();
     const windowRef = useRef<any>(null);
     const dragRef = useRef<any>(null);
     const contentRef = useRef<any>(null);
@@ -263,18 +265,18 @@ const Window: React.FC<WindowProps> = (props) => {
                             <div style={styles.windowTopButtons}>
                                 <Button
                                     icon="minimize"
-                                    label="Minimizar"
+                                    label={t('os.minimize')}
                                     onClick={props.minimizeWindow}
                                 />
                                 <Button
                                     icon="maximize"
-                                    label={isMaximized ? 'Restaurar' : 'Maximizar'}
+                                    label={isMaximized ? t('os.restore') : t('os.maximize')}
                                     onClick={maximize}
                                 />
                                 <div style={{ paddingLeft: 2 }}>
                                     <Button
                                         icon="close"
-                                        label="Cerrar"
+                                        label={t('os.close')}
                                         onClick={props.closeWindow}
                                     />
                                 </div>

@@ -1,21 +1,26 @@
 import React from 'react';
 import printer from '../../assets/resume/printer.gif';
-import Resume from '../../assets/resume/CV_Juan_Alejandro_Cardenas.pdf';
+import { useLocale } from '../../i18n';
+import { mediaUrl } from '../../content';
 
 export interface ResumeDownloadProps {
     altText?: string;
 }
 
 const ResumeDownload: React.FC<ResumeDownloadProps> = ({ altText }) => {
+    const { t, content } = useLocale();
+    const resume = content.profile.resume;
+    if (!resume) return null;
     return (
         <div style={styles.resumeContainer}>
             <img style={styles.resumePrinter} alt="" src={printer} />
             <div style={styles.resumeContainerText}>
-                <p className="h3-style">
-                    {altText ? altText : '¿Buscas mi hoja de vida?'}
-                </p>
-                <a rel="noreferrer" target="_blank" href={Resume}>
-                    <p>¡Haz clic aquí para descargarla!</p>
+                <p className="h3-style">{altText || t('resume.title')}</p>
+                <a rel="noreferrer" target="_blank" href={mediaUrl(resume)}>
+                    <p>
+                        {t('resume.cta')}
+                        <span className="visually-hidden"> {t('newTab')}</span>
+                    </p>
                 </a>
             </div>
         </div>

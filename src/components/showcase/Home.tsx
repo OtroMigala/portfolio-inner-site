@@ -1,32 +1,33 @@
 import React from 'react';
 import { Link } from '../general';
-import profile from '../../constants/profile';
+import { useLocale } from '../../i18n';
 
 export interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
+    const { t, content } = useLocale();
     return (
         <div style={styles.page}>
             <div style={styles.header}>
-                <h1 style={styles.name}>{profile.fullName}</h1>
-                <h2>{profile.role}</h2>
+                <h1 style={styles.name}>{content.profile.fullName}</h1>
+                <h2>{content.profile.role}</h2>
             </div>
-            <nav aria-label="Secciones del portafolio" style={styles.buttons}>
-                <Link containerStyle={styles.link} to="about" text="SOBRE MÍ" />
+            <nav aria-label={t('nav.label')} style={styles.buttons}>
+                <Link containerStyle={styles.link} to="about" text={t('nav.about')} />
                 <Link
                     containerStyle={styles.link}
                     to="experience"
-                    text="EXPERIENCIA"
+                    text={t('nav.experience')}
                 />
                 <Link
                     containerStyle={styles.link}
                     to="projects"
-                    text="PROYECTOS"
+                    text={t('nav.projects')}
                 />
                 <Link
                     containerStyle={styles.link}
                     to="contact"
-                    text="CONTACTO"
+                    text={t('nav.contact')}
                 />
             </nav>
         </div>
