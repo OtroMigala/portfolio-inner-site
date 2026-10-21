@@ -7,9 +7,9 @@ export interface SoftwareProjectsProps {}
 
 const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
     return (
-        <div className="site-page-content">
+        <main className="site-page-content">
             <h1>Software</h1>
-            <h3>Proyectos</h3>
+            <p className="h3-style">Proyectos</p>
             <br />
             <p>
                 Estos son algunos de los proyectos de software en los que he
@@ -107,7 +107,7 @@ const SoftwareProjects: React.FC<SoftwareProjectsProps> = (props) => {
                 </ul>
             </div>
             <ResumeDownload />
-        </div>
+        </main>
     );
 };
 

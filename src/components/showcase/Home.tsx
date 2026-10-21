@@ -6,12 +6,12 @@ export interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
     return (
-        <div style={styles.page}>
+        <main style={styles.page}>
             <div style={styles.header}>
                 <h1 style={styles.name}>{profile.fullName}</h1>
                 <h2>{profile.role}</h2>
             </div>
-            <div style={styles.buttons}>
+            <nav aria-label="Secciones del portafolio" style={styles.buttons}>
                 <Link containerStyle={styles.link} to="about" text="SOBRE MÍ" />
                 <Link
                     containerStyle={styles.link}
@@ -28,13 +28,15 @@ const Home: React.FC<HomeProps> = (props) => {
                     to="contact"
                     text="CONTACTO"
                 />
-            </div>
-        </div>
+            </nav>
+        </main>
     );
 };
 
 const styles: StyleSheetCSS = {
     page: {
+        // <main> and <nav> do not get the global `div { display: flex }` rule.
+        display: 'flex',
         left: 0,
         right: 0,
         top: 0,
@@ -56,6 +58,7 @@ const styles: StyleSheetCSS = {
         justifyContent: 'center',
     },
     buttons: {
+        display: 'flex',
         justifyContent: 'space-between',
     },
     link: {

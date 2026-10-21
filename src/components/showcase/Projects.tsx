@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import software from '../../assets/pictures/projects/software.gif';
 import satellite from '../../assets/pictures/projects/satellite.svg';
 
@@ -20,28 +20,13 @@ const ProjectBox: React.FC<ProjectBoxProps> = ({
     route,
     iconStyle,
 }) => {
-    const [, setIsHovering] = useState(false);
-    const navigation = useNavigate();
-
-    const handleClick = () => {
-        navigation(`/projects/${route}`);
-    };
-
-    const onMouseEnter = () => {
-        setIsHovering(true);
-    };
-
-    const onMouseLeave = () => {
-        setIsHovering(false);
-    };
-
+    // A real link: reachable with Tab, opens with Enter, works with
+    // "open in new tab" and is announced as a link.
     return (
-        <div
-            onMouseDown={handleClick}
+        <Link
+            to={`/projects/${route}`}
             className="big-button-container"
             style={styles.projectLink}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
         >
             <div style={styles.projectLinkLeft}>
                 <img
@@ -54,20 +39,22 @@ const ProjectBox: React.FC<ProjectBoxProps> = ({
                     alt=""
                 />
                 <div style={styles.projectText}>
-                    <h1 style={{ fontSize: 48 }}>{title}</h1>
-                    <h3>{subtitle}</h3>
+                    <span className="h1-style" style={{ fontSize: 48 }}>
+                        {title}
+                    </span>
+                    <span className="h3-style">{subtitle}</span>
                 </div>
             </div>
             <div style={styles.projectLinkRight}></div>
-        </div>
+        </Link>
     );
 };
 
 const Projects: React.FC<ProjectsProps> = (props) => {
     return (
-        <div className="site-page-content">
+        <main className="site-page-content">
             <h1>Proyectos</h1>
-            <h3>Software y aeroespacial</h3>
+            <p className="h3-style">Software y aeroespacial</p>
             <br />
             <p>
                 Haz clic en una de las áreas para ver algunos de los proyectos
@@ -90,7 +77,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
                     route="aerospace"
                 />
             </div>
-        </div>
+        </main>
     );
 };
 
@@ -102,6 +89,9 @@ const styles: StyleSheetCSS = {
         flex: 1,
     },
     projectLink: {
+        display: 'flex',
+        color: 'inherit',
+        textDecoration: 'none',
         marginBottom: 24,
         cursor: 'pointer',
         width: '100%',

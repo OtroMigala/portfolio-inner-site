@@ -29,14 +29,19 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = (props) => {
         return () => {};
     }, [location.pathname]);
 
+    // The page's own h1 is the section title; the name here is branding.
     return !isHome ? (
-        <div style={styles.navbar}>
+        <nav aria-label="Secciones del portafolio" style={styles.navbar}>
             <div style={styles.header}>
-                <h1 style={styles.headerText}>{profile.firstName}</h1>
-                <h1 style={styles.headerText}>{profile.lastName}</h1>
-                <h3 style={styles.headerShowcase}>
+                <p className="h1-style" style={styles.headerText}>
+                    {profile.firstName}
+                </p>
+                <p className="h1-style" style={styles.headerText}>
+                    {profile.lastName}
+                </p>
+                <p className="h3-style" style={styles.headerShowcase}>
                     Portafolio '{String(profile.year).slice(-2)}
-                </h3>
+                </p>
             </div>
             <div style={styles.links}>
                 <Link containerStyle={styles.link} to="" text="INICIO" />
@@ -82,7 +87,7 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = (props) => {
             <div style={styles.forHireContainer} onMouseDown={goToContact}>
                 {/* <img src={forHire} style={styles.image} alt="" /> */}
             </div>
-        </div>
+        </nav>
     ) : (
         <></>
     );
@@ -90,6 +95,8 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = (props) => {
 
 const styles: StyleSheetCSS = {
     navbar: {
+        // <nav> does not get the global `div { display: flex }` rule.
+        display: 'flex',
         width: 300,
         height: '100%',
         flexDirection: 'column',

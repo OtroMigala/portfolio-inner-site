@@ -31,18 +31,18 @@ const ExperienceHeader: React.FC<ExperienceHeaderProps> = ({
             <div style={styles.header}>
                 {logo && <img src={logo} style={styles.logo} alt="" />}
                 <div style={styles.headerRow}>
-                    <h1>{company}</h1>
+                    <h2 className="h1-style">{company}</h2>
                     {url && (
                         <a rel="noreferrer" target="_blank" href={url}>
-                            <h4>{urlText || url}</h4>
+                            <span className="h4-style">{urlText || url}</span>
                         </a>
                     )}
                 </div>
                 <div style={styles.headerRow}>
-                    <h3>{role}</h3>
-                    <b>
-                        <p>{dates}</p>
-                    </b>
+                    <p className="h3-style">{role}</p>
+                    <p>
+                        <b>{dates}</b>
+                    </p>
                 </div>
             </div>
         </div>
@@ -51,7 +51,8 @@ const ExperienceHeader: React.FC<ExperienceHeaderProps> = ({
 
 const Experience: React.FC<ExperienceProps> = (props) => {
     return (
-        <div className="site-page-content">
+        <main className="site-page-content">
+            <h1 className="visually-hidden">Experiencia</h1>
             <ResumeDownload />
             <ExperienceHeader
                 company="EzLife"
@@ -221,7 +222,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                     </li>
                 </ul>
             </div>
-        </div>
+        </main>
     );
 };
 

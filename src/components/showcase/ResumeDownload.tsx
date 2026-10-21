@@ -11,7 +11,9 @@ const ResumeDownload: React.FC<ResumeDownloadProps> = ({ altText }) => {
         <div style={styles.resumeContainer}>
             <img style={styles.resumePrinter} alt="" src={printer} />
             <div style={styles.resumeContainerText}>
-                <h3>{altText ? altText : '¿Buscas mi hoja de vida?'}</h3>
+                <p className="h3-style">
+                    {altText ? altText : '¿Buscas mi hoja de vida?'}
+                </p>
                 <a rel="noreferrer" target="_blank" href={Resume}>
                     <p>¡Haz clic aquí para descargarla!</p>
                 </a>

@@ -18,11 +18,18 @@ const validateEmail = (email: string) => {
 interface SocialBoxProps {
     icon: string;
     link: string;
+    label: string;
 }
 
-const SocialBox: React.FC<SocialBoxProps> = ({ link, icon }) => {
+// Icon-only link: the accessible name comes from `label`.
+const SocialBox: React.FC<SocialBoxProps> = ({ link, icon, label }) => {
     return (
-        <a rel="noreferrer" target="_blank" href={link}>
+        <a
+            rel="noreferrer"
+            target="_blank"
+            href={link}
+            aria-label={`${label} (se abre en una pestaña nueva)`}
+        >
             <div className="big-button-container" style={styles.social}>
                 <img src={icon} alt="" style={styles.socialImage} />
             </div>
@@ -75,13 +82,21 @@ const Contact: React.FC<ContactProps> = (props) => {
     }, [formMessage]);
 
     return (
-        <div className="site-page-content">
+        <main className="site-page-content">
             <div style={styles.header}>
                 <h1>Contacto</h1>
                 <div style={styles.socials}>
-                    <SocialBox icon={ghIcon} link={profile.github} />
+                    <SocialBox
+                        icon={ghIcon}
+                        link={profile.github}
+                        label="GitHub"
+                    />
                     {profile.linkedin && (
-                        <SocialBox icon={inIcon} link={profile.linkedin} />
+                        <SocialBox
+                            icon={inIcon}
+                            link={profile.linkedin}
+                            label="LinkedIn"
+                        />
                     )}
                 </div>
             </div>
@@ -218,7 +233,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                 </div>
             </div>
             <ResumeDownload altText="¿Necesitas una copia de mi hoja de vida?" />
-        </div>
+        </main>
     );
 };
 

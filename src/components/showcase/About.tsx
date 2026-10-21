@@ -12,9 +12,9 @@ export interface AboutProps {}
 const About: React.FC<AboutProps> = (props) => {
     return (
         // add on resize listener
-        <div className="site-page-content">
+        <main className="site-page-content">
             <h1 style={{ marginLeft: -16 }}>Bienvenido</h1>
-            <h3>Soy {profile.fullName}</h3>
+            <h2 className="h3-style">Soy {profile.fullName}</h2>
             <br />
             <div className="text-block">
                 <p>
@@ -36,7 +36,7 @@ const About: React.FC<AboutProps> = (props) => {
             </div>
             <ResumeDownload />
             <div className="text-block">
-                <h3>Sobre mí</h3>
+                <h2 className="h3-style">Sobre mí</h2>
                 <br />
                 <p>
                     Mi lema es simple: {profile.tagline.toLowerCase()}. Me
@@ -78,7 +78,7 @@ const About: React.FC<AboutProps> = (props) => {
                 </p>
                 <br />
                 <br />
-                <h3>Fusión de información</h3>
+                <h2 className="h3-style">Fusión de información</h2>
                 <br />
                 <img src={isifLogo} style={styles.logo} alt="ISIF" />
                 <p>
@@ -108,7 +108,7 @@ const About: React.FC<AboutProps> = (props) => {
                             flexDirection: 'column',
                         }}
                     >
-                        <h3>Reconocimientos</h3>
+                        <h2 className="h3-style">Reconocimientos</h2>
                         <br />
                         <ul>
                             <li>
@@ -132,7 +132,7 @@ const About: React.FC<AboutProps> = (props) => {
                             </li>
                         </ul>
                         <br />
-                        <h3>Idiomas</h3>
+                        <h2 className="h3-style">Idiomas</h2>
                         <br />
                         <p>Español nativo e inglés B1.</p>
                     </div>
@@ -160,7 +160,7 @@ const About: React.FC<AboutProps> = (props) => {
                     <a href={`mailto:${profile.email}`}>{profile.email}</a>
                 </p>
             </div>
-        </div>
+        </main>
     );
 };
 

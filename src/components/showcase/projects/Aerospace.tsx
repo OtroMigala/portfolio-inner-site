@@ -13,9 +13,9 @@ export interface AerospaceProjectsProps {}
 
 const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
     return (
-        <div className="site-page-content">
+        <main className="site-page-content">
             <h1>Aeroespacial</h1>
-            <h3>CanSats y drones</h3>
+            <p className="h3-style">CanSats y drones</p>
             <br />
             <p>
                 Estos proyectos los he desarrollado principalmente con el
@@ -27,7 +27,7 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
             <div className="text-block">
                 <img src={tulcanSatLogo} style={styles.logo} alt="TULCAN-SAT" />
                 <h2>TULCAN-SAT</h2>
-                <h4>Curso-Concurso Mundial CanSat 2025 (UNAM)</h4>
+                <p className="h4-style">Curso-Concurso Mundial CanSat 2025 (UNAM)</p>
                 <br />
                 <p>
                     CubeSat 2U de código abierto con descenso controlado sin
@@ -40,7 +40,7 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
             </div>
             <div className="text-block">
                 <h2>AIR-SAT</h2>
-                <h4>ENMICE 2025 (Jalisco, México)</h4>
+                <p className="h4-style">ENMICE 2025 (Jalisco, México)</p>
                 <br />
                 <p>
                     Sistema tipo CanSat con un EKF optimizado para monitorear la
@@ -53,7 +53,7 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
             </div>
             <div className="text-block">
                 <h2>Navegación de dron agrícola</h2>
-                <h4>Proyecto DSTEI Ticanor (IEEE)</h4>
+                <p className="h4-style">Proyecto DSTEI Ticanor (IEEE)</p>
                 <br />
                 <p>
                     Diseño de algoritmos de fusión sensorial con LiDAR,
@@ -66,7 +66,7 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
             </div>
             <div className="text-block">
                 <h2>Voices of Water and Earth</h2>
-                <h4>EPICS in IEEE</h4>
+                <p className="h4-style">EPICS in IEEE</p>
                 <br />
                 <p>
                     Nodos de comunicación con sensado y fusión de datos para
@@ -78,7 +78,7 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
             <div className="text-block">
                 <img src={spaceAppsLogo} style={styles.logo} alt="NASA Space Apps" />
                 <h2>NASA Space Apps Challenge</h2>
-                <h4>Ediciones 2024 y 2025</h4>
+                <p className="h4-style">Ediciones 2024 y 2025</p>
                 <br />
                 <p>
                     Dirigí la organización del hackathon NASA Space Apps
@@ -86,7 +86,7 @@ const AerospaceProjects: React.FC<AerospaceProjectsProps> = (props) => {
                 </p>
             </div>
             <ResumeDownload />
-        </div>
+        </main>
     );
 };
 

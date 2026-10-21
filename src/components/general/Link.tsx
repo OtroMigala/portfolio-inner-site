@@ -51,12 +51,14 @@ const Link: React.FC<LinkProps> = (props) => {
     return (
         <RouterLink
             to={`/${props.to}`}
+            aria-current={isHere ? 'page' : undefined}
             onMouseDown={handleClick}
             style={Object.assign({}, { display: 'flex' }, props.containerStyle)}
         >
             {isHere && <div style={styles.hereIndicator} />}
-            <h4
-                className="router-link"
+            {/* Link text, not a heading: styled like h4 but outside the outline. */}
+            <span
+                className="router-link h4-style"
                 style={Object.assign(
                     {},
                     styles.link,
@@ -64,7 +66,7 @@ const Link: React.FC<LinkProps> = (props) => {
                 )}
             >
                 {props.text}
-            </h4>
+            </span>
         </RouterLink>
     );
 };
