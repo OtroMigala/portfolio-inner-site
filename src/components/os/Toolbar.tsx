@@ -206,7 +206,9 @@ const Toolbar: React.FC<ToolbarProps> = ({
                     className="toolbar-text"
                     style={styles.langButton}
                     lang={t('os.langToggleCode')}
-                    aria-label={t('os.langToggleLabel')}
+                    // The name starts with the visible text (WCAG 2.5.3), so a
+                    // voice-control user can say "click EN".
+                    aria-label={`${t('os.langToggle')} – ${t('os.langToggleLabel')}`}
                     title={t('os.langToggleLabel')}
                     onClick={() => setLocale(locale === 'es' ? 'en' : 'es')}
                 >
