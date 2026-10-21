@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Window from '../os/Window';
 import { useInterval } from 'usehooks-ts';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import profile from '../../constants/profile';
 
 export interface CreditsProps extends WindowAppProps {}
@@ -44,12 +44,17 @@ const CREDITS = [
 const Credits: React.FC<CreditsProps> = (props) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [time, setTime] = useState(0);
+    // Reduced motion: no auto-advancing slides; the visitor moves on manually.
+    const reduceMotion = useReducedMotion();
 
     // every 5 seconds, move to the next slide
-    useInterval(() => {
-        setTime(time + 1);
-        // setCurrentSlide((currentSlide + 1) % CREDITS.length);
-    }, 1000);
+    useInterval(
+        () => {
+            setTime(time + 1);
+            // setCurrentSlide((currentSlide + 1) % CREDITS.length);
+        },
+        reduceMotion ? null : 1000
+    );
 
     useEffect(() => {
         if (time > 5) {
@@ -112,7 +117,17 @@ const Credits: React.FC<CreditsProps> = (props) => {
                         </motion.div>
                     }
                 </div>
-                <p>Haz clic para continuar...</p>
+                {/* Keyboard path to the next slide; pointer clicks anywhere on
+                    the page already advance it through onMouseDown above. */}
+                <button
+                    type="button"
+                    style={styles.nextButton}
+                    onClick={(e) => {
+                        if (e.detail === 0) nextSlide();
+                    }}
+                >
+                    Haz clic para continuar...
+                </button>
                 <br />
                 <div style={styles.nextSlideTimer}>
                     {/* make a time number of dots */}
@@ -130,6 +145,15 @@ const Credits: React.FC<CreditsProps> = (props) => {
 };
 
 const styles: StyleSheetCSS = {
+    nextButton: {
+        background: 'none',
+        border: 'none',
+        padding: 0,
+        color: 'white',
+        fontFamily: "Millennium, 'Times New Roman', Times, serif",
+        fontSize: 18,
+        cursor: 'pointer',
+    },
     credits: {
         width: '100%',
         backgroundColor: 'black',
