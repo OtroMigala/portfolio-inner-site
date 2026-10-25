@@ -78,6 +78,56 @@ const About: React.FC<AboutProps> = (props) => {
                 </p>
                 <br />
                 <br />
+                <h2 className="h3-style">Habilidades técnicas</h2>
+                <br />
+                <ul>
+                    <li>
+                        <p>
+                            <b>Web 3D y gráficos:</b> three.js / React Three
+                            Fiber, WebGL (shaders GLSL, stencil buffer),
+                            pipeline de assets glTF (meshopt, WebP,
+                            glTF-Transform), presupuestos de rendimiento (draw
+                            calls, triángulos, memoria de GPU).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <b>Rendimiento y accesibilidad:</b> Lighthouse (LCP,
+                            CLS, TBT), análisis de tiempo por frame (p50/p95),
+                            auditorías WCAG 2.2 con axe, navegación por
+                            teclado, regiones aria-live, movimiento reducido y
+                            versión sin JavaScript.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <b>CMS headless:</b> Contentstack (modelado de
+                            contenido, APIs de Delivery y Management, entornos
+                            de producción y preview, despliegues disparados al
+                            publicar, manejo seguro de tokens).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <b>Pruebas y CI/CD:</b> Vitest (más de 230 pruebas
+                            unitarias), Playwright e2e (~290 pruebas en
+                            Chromium, Firefox, WebKit y móvil), regresión visual
+                            por píxeles, GitHub Actions (pipelines matriciales y
+                            por shards, despliegues a GitHub Pages).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <b>Proceso:</b> desarrollo guiado por
+                            especificaciones (criterios de aceptación, matriz de
+                            trazabilidad, presupuestos definidos antes del
+                            código), ADRs y un flujo de trabajo asistido por IA
+                            y auditado.
+                        </p>
+                    </li>
+                </ul>
+                <br />
+                <br />
                 <h2 className="h3-style">Fusión de información</h2>
                 <br />
                 <img src={isifLogo} style={styles.logo} alt="ISIF" />
