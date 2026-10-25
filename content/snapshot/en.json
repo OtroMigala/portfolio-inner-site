@@ -194,6 +194,68 @@
                     "images": []
                 },
                 {
+                    "id": "su-30",
+                    "title": "Su-30",
+                    "description": [
+                        "An interactive portfolio where you fly seated in the cockpit of a Su-30 at night. Scrolling follows a route of waypoints and each waypoint is a section: profile, projects, skills, contact. The information appears on an Ace Combat-inspired HUD and on an interactive display (MFD) inside the cockpit.",
+                        "I built it with React Three Fiber, three.js, GSAP ScrollTrigger and Zustand. The physics is real: the bank angle comes from a coordinated turn (tan φ = v·ω / g), the HUD shows the load factor (n = 1 / cos φ) and all smoothing is frame-rate independent."
+                    ],
+                    "highlights": [
+                        "**Collimated HUD** - The symbology is drawn on a distant plane and clipped with the stencil buffer using the glass mesh, so it has no parallax, like a real HUD.",
+                        "**Interactive MFD** - A CanvasTexture on the cockpit display; clicks are resolved with a raycast that maps the hit's UV coordinate to canvas coordinates.",
+                        "**Accessible** - Radio messages in an aria-live region, full keyboard navigation (Q/E, Enter, 1-7, F to look around) and manual flight with an autopilot."
+                    ],
+                    "links": [
+                        {
+                            "label": "See it live",
+                            "url": "https://otromigala.github.io/Su-30/",
+                            "kind": "website"
+                        },
+                        {
+                            "label": "Repository",
+                            "url": "https://github.com/OtroMigala/Su-30",
+                            "kind": "repository"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "asset:pictures/projects/su30-cockpit.png",
+                            "alt": "View from the Su-30 cockpit at night, with the green HUD on the glass, the panel displays lit and the section menu on the right"
+                        }
+                    ]
+                },
+                {
+                    "id": "the-living-book",
+                    "title": "The Living Book",
+                    "description": [
+                        "A 3D book you read in the browser. Its pages are real HTML, its content lives in Contentstack, and when 3D cannot run it becomes a 2D flip book or a plain article. It works even without JavaScript.",
+                        "It was also the pilot project for a spec-driven development workflow: acceptance criteria, a traceability matrix and performance budgets defined before code, ADRs, and every stage closed at a gate with measured evidence."
+                    ],
+                    "highlights": [
+                        "**3D on a budget** - Astro, three.js and a glTF pipeline (meshopt, WebP, glTF-Transform) with draw call, triangle and GPU memory limits measured at every stage.",
+                        "**Headless CMS** - Content modeled in Contentstack, with production and preview environments and publish-triggered deploys.",
+                        "**Testing** - Over 230 Vitest unit tests and about 290 Playwright e2e tests across Chromium, Firefox, WebKit and mobile, with pixel-based visual regression and WCAG 2.2 audits with axe."
+                    ],
+                    "links": [
+                        {
+                            "label": "See it live",
+                            "url": "https://otromigala.github.io/the-living-book/",
+                            "kind": "website"
+                        },
+                        {
+                            "label": "Repository",
+                            "url": "https://github.com/OtroMigala/the-living-book",
+                            "kind": "repository"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "asset:pictures/projects/living-book.png",
+                            "alt": "The open 3D book on an inlaid wooden table, next to other books, a magnifying glass and a lit candle, over a red rug"
+                        }
+                    ]
+                },
+                {
                     "id": "websites",
                     "title": "Websites",
                     "description": [
