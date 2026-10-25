@@ -42,6 +42,17 @@
             "imageAfter": 1
         },
         {
+            "id": "technical-skills",
+            "heading": "Habilidades técnicas",
+            "body": [
+                "**Web 3D y gráficos:** three.js / React Three Fiber, WebGL (shaders GLSL, stencil buffer), pipeline de assets glTF (meshopt, WebP, glTF-Transform), presupuestos de rendimiento (draw calls, triángulos, memoria de GPU).",
+                "**Rendimiento y accesibilidad:** Lighthouse (LCP, CLS, TBT), análisis de tiempo por frame (p50/p95), auditorías WCAG 2.2 con axe, navegación por teclado, regiones aria-live, movimiento reducido y versión sin JavaScript.",
+                "**CMS headless:** Contentstack (modelado de contenido, APIs de Delivery y Management, entornos de producción y preview, despliegues disparados al publicar, manejo seguro de tokens).",
+                "**Pruebas y CI/CD:** Vitest (más de 230 pruebas unitarias), Playwright e2e (~290 pruebas en Chromium, Firefox, WebKit y móvil), regresión visual por píxeles, GitHub Actions (pipelines matriciales y por shards, despliegues a GitHub Pages).",
+                "**Proceso:** desarrollo guiado por especificaciones (criterios de aceptación, matriz de trazabilidad, presupuestos definidos antes del código), ADRs y un flujo de trabajo asistido por IA y auditado."
+            ]
+        },
+        {
             "id": "information-fusion",
             "heading": "Fusión de información",
             "body": [

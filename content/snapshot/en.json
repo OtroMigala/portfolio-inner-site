@@ -42,6 +42,17 @@
             "imageAfter": 1
         },
         {
+            "id": "technical-skills",
+            "heading": "Technical skills",
+            "body": [
+                "**Web 3D & graphics:** three.js / React Three Fiber, WebGL (GLSL shaders, stencil buffer), glTF asset pipeline (meshopt, WebP, glTF-Transform), performance budgets (draw calls, triangles, GPU memory).",
+                "**Performance & accessibility:** Lighthouse (LCP, CLS, TBT), frame-time analysis (p50/p95), WCAG 2.2 audits with axe, keyboard navigation, aria-live regions, reduced motion, no-JS fallback.",
+                "**Headless CMS:** Contentstack (content modeling, Delivery and Management APIs, production and preview environments, publish-triggered deploys, secure token handling).",
+                "**Testing & CI/CD:** Vitest (230+ unit tests), Playwright e2e (~290 tests across Chromium, Firefox, WebKit and mobile), pixel-based visual regression, GitHub Actions (matrix and sharded pipelines, GitHub Pages deploys).",
+                "**Process:** spec-driven development (acceptance criteria, traceability matrix, budgets defined before code), ADRs, audited AI-assisted workflow."
+            ]
+        },
+        {
             "id": "information-fusion",
             "heading": "Information fusion",
             "body": [
